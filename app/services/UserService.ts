@@ -8,8 +8,8 @@ export default class UserService implements IUserService {
     return this.userRepository.getAll();
   }
 
-  showUser(id: number) {
-    return this.userRepository.findOne(id);
+  async showUser(id: number) {
+    return await this.userRepository.findOne(id);
   }
 
   createUser(data: object) {

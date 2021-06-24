@@ -54,9 +54,9 @@ test.group("Test UserController", (group) => {
 
   test.only("DELETE /users/id - should delete the user", async (assert) => {
     const testUser = await UserFactory.create();
-    const { body } = await api
+    const res = await api
       .delete(`/users/${testUser.$attributes.id}`)
       .expect(200);
-    assert.isOk(body);
+    assert.isTrue(res.body);
   });
 });

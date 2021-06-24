@@ -1,13 +1,26 @@
-// import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
+import ProductService from "App/services/ProductService";
 
 export default class ProductsController {
-  public async index() {}
+  private readonly productService: ProductService = new ProductService();
 
-  public async store() {}
+  public async index() {
+    return this.productService.getProduct();
+  }
 
-  public async show() {}
+  public async store({ request }: http) {
+    return this.productService.createProduct(request.all());
+  }
 
-  public async update() {}
+  public async show({ params }: http) {
+    return this.productService.showProduct(params.id);
+  }
 
-  public async destroy() {}
+  public async update({ params, request }: http) {
+    return this.productService.updateProduct(params.id, request.all());
+  }
+
+  public async destroy({ params }: http) {
+    return this.productService.deleteProduct(params.id);
+  }
 }
