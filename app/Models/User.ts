@@ -2,7 +2,6 @@ import {
   BaseModel,
   beforeSave,
   column,
-  computed,
   hasOne,
   HasOne,
 } from "@ioc:Adonis/Lucid/Orm";
@@ -46,11 +45,6 @@ export default class User extends BaseModel {
     if (user.$dirty.password) {
       user.password = await Hash.make(user.password);
     }
-  }
-
-  @computed()
-  public get fullName() {
-    return `${this.firstName} ${this.lastName}`;
   }
 
   @hasOne(() => Shop)

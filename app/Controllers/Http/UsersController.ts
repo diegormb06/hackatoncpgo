@@ -21,5 +21,7 @@ export default class UsersController {
     return this.userService.updateUser(params.id, request.all());
   }
 
-  public async destroy() {}
+  public async destroy({ params }: http) {
+    return this.userService.deleteUser(params.id);
+  }
 }

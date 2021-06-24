@@ -10,11 +10,11 @@ export default class CreateUsersTable extends BaseSchema {
       table.string("last_name").notNullable();
       table.string("email").unique().notNullable();
       table.string("password").notNullable();
-      table.string("cpf", 11).unique().notNullable();
-      table.string("phone", 11);
+      table.string("cpf", 14).unique().notNullable();
+      table.string("phone", 14).notNullable();
       table.string("photo");
-      table.timestamp("created_at", { useTz: true });
-      table.timestamp("updated_at", { useTz: true });
+      table.timestamp("created_at");
+      table.timestamp("updated_at");
     });
   }
 
