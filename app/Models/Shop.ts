@@ -7,7 +7,7 @@ export default class Shop extends BaseModel {
   public id: number;
 
   @column()
-  public userId: number;
+  public user_id: number;
 
   @column()
   public name: string;
@@ -16,7 +16,7 @@ export default class Shop extends BaseModel {
   public phone: string;
 
   @column()
-  public mobilePhone: string;
+  public mobile_phone: string;
 
   @column()
   public cnpj: string;
@@ -25,11 +25,30 @@ export default class Shop extends BaseModel {
   public logo: string;
 
   @column()
-  public adress: string;
+  public zipcode: string;
 
   @column()
-  public photo: string;
+  public address: string;
 
+  @column()
+  public number: number;
+
+  @column()
+  public complement: string;
+
+  @column()
+  public district: string;
+
+  @column()
+  public city: string;
+
+  @column()
+  public state: string;
+
+  @column()
+  public country: string;
+
+  @column()
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 

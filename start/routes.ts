@@ -34,7 +34,7 @@ Route.post("/login", async ({ auth, request, response }) => {
     console.log(error);
     return response.badRequest(error);
   }
-});
+}).prefix("/api");
 
 Route.group(() => {
   Route.resource("users", "UsersController").apiOnly();
