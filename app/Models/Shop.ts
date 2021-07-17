@@ -7,7 +7,7 @@ export default class Shop extends BaseModel {
   public id: number;
 
   @column()
-  public user_id: number;
+  public userId: number;
 
   @column()
   public name: string;
@@ -48,7 +48,6 @@ export default class Shop extends BaseModel {
   @column()
   public country: string;
 
-  @column()
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 

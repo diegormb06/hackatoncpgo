@@ -4,11 +4,13 @@ export default abstract class BaseRepository implements IRepository {
   protected constructor(private model) {}
 
   async create(data: object) {
-    return await this.model.create(data);
+    const newData = await this.model.create(data);
+    return newData.serialize();
   }
 
   async getAll() {
-    return await this.model.query().paginate(1, 10);
+    const results = (await this.model.query().paginate(1, 10)).serialize();
+    return { data: results.data, ...results.meta };
   }
 
   async findOne(id: number) {

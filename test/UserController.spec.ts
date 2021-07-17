@@ -1,6 +1,6 @@
 import test from "japa";
 import supertest from "supertest";
-import { UserFactory } from "Database/factories";
+import { UserFactory } from "Database/factories/userFactory";
 import Database from "@ioc:Adonis/Lucid/Database";
 const BASE_URL = `http://${process.env.HOST}:${process.env.PORT}`;
 const api = supertest(BASE_URL + "/api");
@@ -52,7 +52,7 @@ test.group("Test UserController", (group) => {
     assert.propertyVal(body, "last_name", "Doe");
   });
 
-  test.only("DELETE /users/id - should delete the user", async (assert) => {
+  test("DELETE /users/id - should delete the user", async (assert) => {
     const testUser = await UserFactory.create();
     const res = await api
       .delete(`/users/${testUser.$attributes.id}`)
