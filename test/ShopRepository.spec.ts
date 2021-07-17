@@ -73,7 +73,7 @@ test.group("Test ShopRepository", (group) => {
     // const shop = await shopRepository.findOne(testShop.serialize().id);
     assert.isOk(testShop, "findOne should return an truthy value");
     // assert.containsAllKeys(shop, shopAttributes);
-  }).timeout(18000);
+  });
 
   // test("GET /users - should get all users", async (assert) => {
   //   const { body } = await api.get("/users").expect(200);
