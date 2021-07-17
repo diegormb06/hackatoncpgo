@@ -76,24 +76,16 @@ test.group("Test UserRepository", (group) => {
     );
   });
 
-  test.only("userRepository.update should update an user data", async (assert) => {
+  test("userRepository.update should update an user data", async (assert) => {
     const testUser = await UserFactory.create();
     const newTestUserData = await UserFactory.makeStubbed();
-    const {
-      id,
-      createdAt,
-      updatedAt,
-      ...newData
-    } = newTestUserData.serialize();
-
-    console.log(newData);
-
+    const { updatedAt, password, ...newData } = newTestUserData.serialize();
     const updatedUser = await userRepository.update(
       testUser.serialize().id,
       newData
     );
 
-    console.log(updatedUser);
     assert.isOk(updatedUser);
+    assert.ownInclude(updatedUser.serialize(), newData);
   });
 });

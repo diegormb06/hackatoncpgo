@@ -19,7 +19,7 @@ export default abstract class BaseRepository implements IRepository {
   }
 
   async update(id: number, newData: object) {
-    let data = await this.findOne(id);
+    let data = await this.model.findOrFail(id);
     data.merge(newData);
     await data.save();
     return data;
