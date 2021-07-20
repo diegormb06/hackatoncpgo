@@ -57,6 +57,7 @@ test.group("Test UserController", (group) => {
     const res = await api
       .delete(`/users/${testUser.$attributes.id}`)
       .expect(200);
-    assert.isTrue(res.body);
+    assert.isObject(res.body);
+    assert.ownInclude(res.body, { message: "success" });
   });
 });

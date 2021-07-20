@@ -1,6 +1,14 @@
 import { DateTime } from "luxon";
-import { BaseModel, belongsTo, BelongsTo, column } from "@ioc:Adonis/Lucid/Orm";
+import {
+  BaseModel,
+  belongsTo,
+  BelongsTo,
+  column,
+  HasMany,
+  hasMany,
+} from "@ioc:Adonis/Lucid/Orm";
 import User from "App/Models/User";
+import Product from "App/Models/Product";
 
 export default class Shop extends BaseModel {
   @column({ isPrimary: true })
@@ -31,7 +39,7 @@ export default class Shop extends BaseModel {
   public address: string;
 
   @column()
-  public number: number;
+  public number: string;
 
   @column()
   public complement: string;
@@ -56,4 +64,7 @@ export default class Shop extends BaseModel {
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>;
+
+  @hasMany(() => Product)
+  public product: HasMany<typeof Product>;
 }

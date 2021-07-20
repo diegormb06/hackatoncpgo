@@ -26,6 +26,8 @@ export default abstract class BaseRepository implements IRepository {
   }
 
   async delete(id: number) {
-    return await this.model.findOrFail(id);
+    let model = await this.model.findOrFail(id);
+    model.delete();
+    return { message: "success" };
   }
 }

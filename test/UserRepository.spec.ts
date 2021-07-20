@@ -2,6 +2,7 @@ import test from "japa";
 import UserRepository from "App/repository/UserRepository";
 import { UserFactory } from "Database/factories/userFactory";
 import Database from "@ioc:Adonis/Lucid/Database";
+import User from "App/Models/User";
 const userRepository = new UserRepository();
 
 const userAttributes = [
@@ -87,5 +88,13 @@ test.group("Test UserRepository", (group) => {
 
     assert.isOk(updatedUser);
     assert.ownInclude(updatedUser.serialize(), newData);
+  });
+
+  test("userRepository.delete should delete a user", async (assert) => {
+    const testUser = await UserFactory.create();
+    const deleteResponse = await userRepository.delete(testUser.id);
+    const tryFindUser = await User.find(testUser.id);
+    assert.ownInclude(deleteResponse, { message: "success" });
+    assert.isNull(tryFindUser);
   });
 });

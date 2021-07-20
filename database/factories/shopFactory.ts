@@ -12,11 +12,13 @@ export const ShopFactory = Factory.define(Shop, async ({ faker }) => {
     logo: faker.image.abstract(),
     zipcode: faker.address.zipCode("7####-###"),
     address: faker.address.streetAddress(),
-    number: faker.datatype.number({ min: 10, max: 4 }),
+    number: faker.address.zipCode("####"),
     complement: faker.address.secondaryAddress(),
     district: faker.address.county(),
     city: faker.address.city(),
     state: "Goiás",
     country: "Brasil",
   };
-}).build();
+})
+  .relation("user", () => UserFactory)
+  .build();

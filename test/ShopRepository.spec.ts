@@ -1,7 +1,7 @@
 import test from "japa";
 import ShopRepository from "App/repository/ShopRepository";
 import { ShopFactory } from "Database/factories/shopFactory";
-import Database from "@ioc:Adonis/Lucid/Database";
+import Shop from "App/Models/Shop";
 const shopRepository = new ShopRepository();
 
 const shopAttributes = [
@@ -24,16 +24,9 @@ const shopAttributes = [
   "updated_at",
 ];
 
-test.group("Test ShopRepository", (group) => {
-  group.before(async () => {
-    await Database.beginGlobalTransaction();
-  });
-  group.after(async () => {
-    await Database.rollbackGlobalTransaction();
-  });
-
-  test("create should create and returns a shop", async (assert) => {
-    const newShop = await ShopFactory.create();
+test.group("Test ShopRepository", () => {
+  test("ShopRepository.create should create and returns a shop", async (assert) => {
+    const newShop = await ShopFactory.makeStubbed();
     delete newShop.$attributes.id;
     const createdShop = await shopRepository.create(newShop.serialize());
 
@@ -45,7 +38,7 @@ test.group("Test ShopRepository", (group) => {
     );
   });
 
-  test("getAll should return an array of shop and paginate data", async (assert) => {
+  test("ShopRepository.getAll should return an array of shop and paginate data", async (assert) => {
     const shops = await shopRepository.getAll();
     assert.isOk(shops, "getAll return truthy value");
     assert.containsAllKeys(
@@ -67,45 +60,31 @@ test.group("Test ShopRepository", (group) => {
     assert.isArray(shops.data, "data should be an array");
   });
 
-  test("findOne should return one shop data", async (assert) => {
+  test("ShopRepository.findOne should return a shop data", async (assert) => {
     const testShop = await ShopFactory.create();
-    console.log("testShop", testShop);
-    // const shop = await shopRepository.findOne(testShop.serialize().id);
+    const shop = await shopRepository.findOne(testShop.serialize().id);
     assert.isOk(testShop, "findOne should return an truthy value");
-    // assert.containsAllKeys(shop, shopAttributes);
+    assert.ownInclude(testShop.serialize(), shop);
   });
 
-  // test("GET /users - should get all users", async (assert) => {
-  //   const { body } = await api.get("/users").expect(200);
-  //   assert.hasAnyKeys(body, ["meta", "data"], "the return is a valid object");
-  //   assert.isArray(body.data, "data field is an array");
-  // });
-  //
-  // test("GET /users/id - should return a specific user", async (assert) => {
-  //   const testUser = await UserFactory.create();
-  //   const newUserId = testUser.$attributes.id;
-  //   const { body } = await api.get(`/users/${newUserId}`).expect(200);
-  //   assert.hasAllKeys(body, testUser.serialize(), "the return is a user data");
-  // });
-  //
-  // test("PUT /users/id - should update the user", async (assert) => {
-  //   const testUser = await UserFactory.create();
-  //   const testData = testUser.serialize();
-  //
-  //   const { body } = await api
-  //     .put(`/users/${testData.id}`)
-  //     .send({ firstName: "John", lastName: "Doe" })
-  //     .expect(200);
-  //
-  //   assert.propertyVal(body, "first_name", "John");
-  //   assert.propertyVal(body, "last_name", "Doe");
-  // });
-  //
-  // test.only("DELETE /users/id - should delete the user", async (assert) => {
-  //   const testUser = await UserFactory.create();
-  //   const res = await api
-  //     .delete(`/users/${testUser.$attributes.id}`)
-  //     .expect(200);
-  //   assert.isTrue(res.body);
-  // });
+  test("shopRepository.update should update a shop data", async (assert) => {
+    const testShop = await ShopFactory.create();
+    const newTestShopData = await ShopFactory.makeStubbed();
+    const { updatedAt, password, ...newData } = newTestShopData.serialize();
+    const updatedShop = await shopRepository.update(
+      testShop.serialize().id,
+      newData
+    );
+
+    assert.isOk(updatedShop);
+    assert.ownInclude(updatedShop.serialize(), newData);
+  });
+
+  test("shopRepository.delete should delete a shop", async (assert) => {
+    const testShop = await ShopFactory.create();
+    const deleteResponse = await shopRepository.delete(testShop.id);
+    const tryFindShop = await Shop.find(testShop.id);
+    assert.ownInclude(deleteResponse, { message: "success" });
+    assert.isNull(tryFindShop);
+  });
 });

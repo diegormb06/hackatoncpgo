@@ -1,15 +1,16 @@
 import { DateTime } from "luxon";
-import { BaseModel, column } from "@ioc:Adonis/Lucid/Orm";
+import { BaseModel, BelongsTo, belongsTo, column } from "@ioc:Adonis/Lucid/Orm";
+import Shop from "App/Models/Shop";
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
 
   @column()
-  public shop_id: string;
+  public shopId: number;
 
   @column()
-  public category_id: string;
+  public categoryId: number;
 
   @column()
   public title: string;
@@ -21,19 +22,19 @@ export default class Product extends BaseModel {
   public price: string;
 
   @column()
-  public stock_quantity: string;
+  public stock_quantity: number;
 
   @column()
-  public stars: string;
+  public stars: number;
 
   @column()
   public status: string;
 
   @column()
-  public created_at: string;
+  public created_at: DateTime;
 
   @column()
-  public updated_at: string;
+  public updated_at: DateTime;
 
   @column()
   public deleted_at: string;
@@ -46,4 +47,7 @@ export default class Product extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  @belongsTo(() => Shop)
+  public shop: BelongsTo<typeof Shop>;
 }
