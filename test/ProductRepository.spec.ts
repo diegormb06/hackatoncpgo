@@ -22,16 +22,13 @@ test.group("Test ProductRepository", () => {
   test.only("ProductRepository.create should create and returns an product", async (assert) => {
     const newProduct = await ProductFactory.makeStubbed();
     delete newProduct.$attributes.id;
+    console.log(newProduct.$attributes);
     const createdProduct = await productRepository.create(
       newProduct.serialize()
     );
 
     assert.isObject(createdProduct, "product data should be an object");
-    assert.containsAllKeys(
-      createdProduct,
-      productAttributes,
-      "product data should contains all required attributes"
-    );
+    assert.containsAllKeys(createdProduct, productAttributes);
   });
 
   test("productRepository.getAll should return an array of product and paginate data", async (assert) => {
