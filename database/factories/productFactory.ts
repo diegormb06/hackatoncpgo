@@ -5,7 +5,7 @@ import { ShopFactory } from "Database/factories/shopFactory";
 export const ProductFactory = Factory.define(Product, async ({ faker }) => {
   return {
     shop_id: (await ShopFactory.create()).id,
-    category_id: faker.datatype.number({ max: 3 }),
+    category_id: faker.datatype.number({ min: 1, max: 3 }),
     title: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     price: faker.finance.amount(),

@@ -1,7 +1,6 @@
 import test from "japa";
 import ProductRepository from "App/repository/ProductRepository";
 import { ProductFactory } from "Database/factories/productFactory";
-import Product from "App/Models/Product";
 const productRepository = new ProductRepository();
 
 const productAttributes = [
@@ -19,12 +18,11 @@ const productAttributes = [
 ];
 
 test.group("Test ProductRepository", () => {
-  test.only("ProductRepository.create should create and returns an product", async (assert) => {
+  test("ProductRepository.create should create and returns an product", async (assert) => {
     const newProduct = await ProductFactory.makeStubbed();
     delete newProduct.$attributes.id;
-    console.log(newProduct.$attributes);
     const createdProduct = await productRepository.create(
-      newProduct.serialize()
+      newProduct.$attributes
     );
 
     assert.isObject(createdProduct, "product data should be an object");
@@ -58,17 +56,10 @@ test.group("Test ProductRepository", () => {
     const foundProduct = await productRepository.findOne(
       testProduct.serialize().id
     );
+
     assert.isOk(foundProduct, "findOne should return an truthy value");
-    assert.containsAllKeys(
-      foundProduct,
-      productAttributes,
-      "found product has all product attributes"
-    );
-    assert.ownInclude(
-      testProduct.serialize(),
-      foundProduct,
-      "found product is equal to testProduct"
-    );
+    assert.containsAllKeys(foundProduct, productAttributes);
+    assert.ownInclude(testProduct.serialize(), foundProduct);
   });
 
   test("productRepository.update should update an product data", async (assert) => {
@@ -87,8 +78,7 @@ test.group("Test ProductRepository", () => {
   test("productRepository.delete should delete a product", async (assert) => {
     const testProduct = await ProductFactory.create();
     const deleteResponse = await productRepository.delete(testProduct.id);
-    const tryFindProduct = await Product.find(testProduct.id);
+
     assert.ownInclude(deleteResponse, { message: "success" });
-    assert.isNull(tryFindProduct);
   });
 });

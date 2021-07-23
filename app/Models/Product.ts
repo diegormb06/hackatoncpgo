@@ -1,6 +1,7 @@
 import { DateTime } from "luxon";
 import { BaseModel, BelongsTo, belongsTo, column } from "@ioc:Adonis/Lucid/Orm";
 import Shop from "App/Models/Shop";
+import Category from "App/Models/Category";
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
@@ -50,4 +51,7 @@ export default class Product extends BaseModel {
 
   @belongsTo(() => Shop)
   public shop: BelongsTo<typeof Shop>;
+
+  @belongsTo(() => Category)
+  public category: BelongsTo<typeof Category>;
 }
