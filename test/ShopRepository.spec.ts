@@ -1,7 +1,6 @@
 import test from "japa";
 import ShopRepository from "App/repository/ShopRepository";
 import { ShopFactory } from "Database/factories/shopFactory";
-import Shop from "App/Models/Shop";
 const shopRepository = new ShopRepository();
 
 const shopAttributes = [

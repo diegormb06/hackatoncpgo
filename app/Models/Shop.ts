@@ -66,5 +66,5 @@ export default class Shop extends BaseModel {
   public user: BelongsTo<typeof User>;
 
   @hasMany(() => Product)
-  public product: HasMany<typeof Product>;
+  public products: HasMany<typeof Product>;
 }

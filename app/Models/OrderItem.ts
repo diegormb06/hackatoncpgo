@@ -1,37 +1,34 @@
 import { DateTime } from "luxon";
 import { BaseModel, BelongsTo, belongsTo, column } from "@ioc:Adonis/Lucid/Orm";
-import User from "App/Models/User";
+import Order from "App/Models/Order";
 
-export default class Address extends BaseModel {
+export default class OrderItem extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
 
   @column()
-  public userId: number;
+  public order_id: number;
 
   @column()
-  public zipcode: string;
+  public product_id: number;
 
   @column()
-  public address: string;
+  public shop_id: number;
 
   @column()
-  public number: string;
+  public title: number;
 
   @column()
-  public complement: string;
+  public unit_price: number;
 
   @column()
-  public district: string;
+  public quantity: number;
 
   @column()
-  public city: string;
+  public discount: number;
 
   @column()
-  public state: string;
-
-  @column()
-  public country: string;
+  public total: number;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
@@ -39,6 +36,6 @@ export default class Address extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
 
-  @belongsTo(() => User)
-  public user: BelongsTo<typeof User>;
+  @belongsTo(() => Order)
+  public order: BelongsTo<typeof Order>;
 }
