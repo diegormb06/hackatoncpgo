@@ -1,7 +1,15 @@
 import { DateTime } from "luxon";
-import { BaseModel, BelongsTo, belongsTo, column } from "@ioc:Adonis/Lucid/Orm";
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  HasMany,
+  hasMany,
+} from "@ioc:Adonis/Lucid/Orm";
 import Shop from "App/Models/Shop";
 import Category from "App/Models/Category";
+import ProductImage from "App/Models/ProductImage";
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
@@ -40,9 +48,6 @@ export default class Product extends BaseModel {
   @column()
   public deleted_at: string;
 
-  @column()
-  public images: string;
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 
@@ -54,4 +59,7 @@ export default class Product extends BaseModel {
 
   @belongsTo(() => Category)
   public category: BelongsTo<typeof Category>;
+
+  @hasMany(() => ProductImage)
+  public images: HasMany<typeof ProductImage>;
 }
