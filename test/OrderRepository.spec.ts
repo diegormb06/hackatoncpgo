@@ -9,8 +9,7 @@ const orderAttributes = [
   "ship_address",
   "freight",
   "total_value",
-  "status",
-  "awaiting",
+  "status"
 ];
 
 test.group("Test OrderRepository", () => {
@@ -47,7 +46,7 @@ test.group("Test OrderRepository", () => {
 
   test("orderRepository.findOne should return one order data", async (assert) => {
     const testOrder = await OrderFactory.create();
-    const foundOrder = await orderRepository.findOne(testOrder.serialize().id);
+    const foundOrder = await orderRepository.findOne(testOrder.id);
 
     assert.isOk(foundOrder, "findOne should return an truthy value");
     assert.containsAllKeys(foundOrder, orderAttributes);

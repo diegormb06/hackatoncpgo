@@ -8,8 +8,8 @@ export default class CreateOrdersTables extends BaseSchema {
       table.increments("id").primary();
       table.integer("user_id").unsigned();
       table.integer("ship_address").unsigned();
-      table.decimal("freight", 8, 2).defaultTo(9.99);
-      table.decimal("total_value", 8, 2).notNullable();
+      table.float("freight", 8, 2).defaultTo(9.99);
+      table.float("total_value", 8, 2).notNullable();
       table
         .enum("status", ["awaiting", "received", "delivering", "complete"])
         .defaultTo("awaiting");
