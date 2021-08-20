@@ -28,10 +28,8 @@ Route.post("/login", async ({ auth, request, response }) => {
   const email = request.input("email");
   const password = request.input("password");
   try {
-    const token = await auth.use("api").attempt(email, password);
-    return token;
+    return await auth.use("api").attempt(email, password);
   } catch (error) {
-    console.log(error);
     return response.badRequest(error);
   }
 }).prefix("/api");
@@ -41,4 +39,7 @@ Route.group(() => {
   Route.resource("products", "ProductsController").apiOnly();
   Route.resource("shops", "ShopsController").apiOnly();
   Route.resource("orders", "OrdersController").apiOnly();
+
+  Route.post("uploads/photo/:user_id", "ImagesController.uploadPhoto");
+  Route.put("uploads/photo/:user_id", "ImagesController.updatePhoto");
 }).prefix("/api");
