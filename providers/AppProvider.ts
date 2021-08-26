@@ -5,6 +5,10 @@ export default class AppProvider {
 
   public async register() {
     // Register your own bindings
+    const ImageService = (await import( "App/services/ImageService")).default
+    this.app.container.singleton(
+      "Services/ImageServices", () => new ImageService()
+    )
   }
 
   public async boot() {

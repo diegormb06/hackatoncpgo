@@ -19,5 +19,5 @@ export default interface IUserService {
   showUser(id: number): Promise<UserType>;
   createUser(data: object): Promise<UserType>;
   updateUser(id: number, data: object): Promise<UserType>;
-  deleteUser(id: number): Promise<boolean>;
+  deleteUser(id: number): Promise<{ message: string; }>;
 }

@@ -11,7 +11,7 @@ const imageAttributes = [
 ];
 
 test.group("Test ProductImageRepository", () => {
-  test.only("ProductImageRepository.create should create and returns an image data", async (assert) => {
+  test("ProductImageRepository.create should create and returns an image data", async (assert) => {
     const newImage = await productImageRepository.create({
       product_id: 1,
       path: "products/imagem-do-produto.jpg",

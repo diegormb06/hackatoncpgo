@@ -41,5 +41,5 @@ Route.group(() => {
   Route.resource("orders", "OrdersController").apiOnly();
 
   Route.post("uploads/photo/:user_id", "ImagesController.uploadPhoto");
-  Route.put("uploads/photo/:user_id", "ImagesController.updatePhoto");
+  Route.post("uploads/images/:product_id", "ImagesController.uploadImages");
 }).prefix("/api");
