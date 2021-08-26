@@ -12,12 +12,12 @@ export default class ImagesController {
   }
 
   public async uploadImages({ request, params }: http) {
-    const file = request.file("photo", {
+    const images = request.files("images", {
       size: "2mb",
       extnames: ["jpg", "png", "gif"],
     });
 
-    return imageService.uploadPhoto(params.user_id, file);
+    return imageService.uploadImages(params.product_id, images);
   }
 
   public async deletePhoto() {}
