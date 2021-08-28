@@ -20,6 +20,9 @@ export default class ImagesController {
     return imageService.uploadImages(params.product_id, images);
   }
 
-  public async deletePhoto() {}
+  public async deletePhoto({ params }: http) {
+    return imageService.deletePhoto(params.user_id);
+  }
+
   public async deleteImages() {}
 }

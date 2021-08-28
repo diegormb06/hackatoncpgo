@@ -16,7 +16,7 @@ test.group("Test ProductImageRepository", () => {
       product_id: 1,
       path: "products/imagem-do-produto.jpg",
     });
-    console.log("", newImage);
+
     assert.isObject(newImage);
     assert.containsAllKeys(newImage, imageAttributes);
   });

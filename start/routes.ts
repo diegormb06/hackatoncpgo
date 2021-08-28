@@ -41,5 +41,7 @@ Route.group(() => {
   Route.resource("orders", "OrdersController").apiOnly();
 
   Route.post("uploads/photo/:user_id", "ImagesController.uploadPhoto");
+  Route.delete("uploads/photo/:user_id", "ImagesController.deletePhoto");
   Route.post("uploads/images/:product_id", "ImagesController.uploadImages");
+  Route.delete("uploads/images/:image_id", "ImagesController.deleteImages");
 }).prefix("/api");
