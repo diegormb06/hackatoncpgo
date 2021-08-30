@@ -32,7 +32,7 @@ Route.post("/login", async ({ auth, request, response }) => {
   } catch (error) {
     return response.badRequest(error);
   }
-}).prefix("/api");
+}).prefix("/autofast/api");
 
 Route.group(() => {
   Route.resource("users", "UsersController").apiOnly();
@@ -44,4 +44,4 @@ Route.group(() => {
   Route.delete("uploads/photo/:user_id", "ImagesController.deletePhoto");
   Route.post("uploads/images/:product_id", "ImagesController.uploadImages");
   Route.delete("uploads/images/:image_id", "ImagesController.deleteImages");
-}).prefix("/api");
+}).prefix("/autofast/api");

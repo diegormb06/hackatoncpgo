@@ -7,7 +7,7 @@ export default class ProductImage extends BaseModel {
   public id: number;
 
   @column()
-  public product_id: string;
+  public productId: string;
 
   @column()
   public path: string;
