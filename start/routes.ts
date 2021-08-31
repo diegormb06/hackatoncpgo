@@ -44,4 +44,5 @@ Route.group(() => {
   Route.delete("uploads/photo/:user_id", "ImagesController.deletePhoto");
   Route.post("uploads/images/:product_id", "ImagesController.uploadImages");
   Route.delete("uploads/images/:image_id", "ImagesController.deleteImages");
+  Route.get("uploads/:type/:filename", "ImagesController.show");
 }).prefix("/autofast/api");
