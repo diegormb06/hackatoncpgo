@@ -24,15 +24,7 @@ Route.get("/api", async () => {
   return { msg: "Api is running" };
 });
 
-Route.post("/login", async ({ auth, request, response }) => {
-  const email = request.input("email");
-  const password = request.input("password");
-  try {
-    return await auth.use("api").attempt(email, password);
-  } catch (error) {
-    return response.badRequest(error);
-  }
-}).prefix("/autofast/api");
+Route.post("/login", "AuthController.login").prefix("/autofast/api");
 
 Route.group(() => {
   Route.resource("users", "UsersController").apiOnly();
