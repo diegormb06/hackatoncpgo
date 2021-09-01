@@ -20,10 +20,7 @@
 
 import Route from "@ioc:Adonis/Core/Route";
 
-Route.get("/api", async () => {
-  return { msg: "Api is running" };
-});
-
+Route.get("/api", () => "Api is running");
 Route.post("/login", "AuthController.login").prefix("/autofast/api");
 
 Route.group(() => {
