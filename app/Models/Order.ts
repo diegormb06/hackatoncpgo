@@ -1,13 +1,21 @@
 import { DateTime } from "luxon";
-import { BaseModel, column, HasMany, hasMany } from "@ioc:Adonis/Lucid/Orm";
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  HasMany,
+  hasMany,
+} from "@ioc:Adonis/Lucid/Orm";
 import OrderItem from "App/Models/OrderItem";
+import User from "App/Models/User";
 
 export default class Order extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
 
   @column()
-  public user_id: number;
+  public userId: number;
 
   @column()
   public ship_address: number;
@@ -29,4 +37,7 @@ export default class Order extends BaseModel {
 
   @hasMany(() => OrderItem)
   public items: HasMany<typeof OrderItem>;
+
+  @belongsTo(() => User)
+  public user: BelongsTo<typeof User>;
 }
