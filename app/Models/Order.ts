@@ -9,6 +9,7 @@ import {
 } from "@ioc:Adonis/Lucid/Orm";
 import OrderItem from "App/Models/OrderItem";
 import User from "App/Models/User";
+import Address from "App/Models/Address";
 
 export default class Order extends BaseModel {
   @column({ isPrimary: true })
@@ -40,4 +41,7 @@ export default class Order extends BaseModel {
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>;
+
+  @belongsTo(() => Address)
+  public address: BelongsTo<typeof Address>;
 }
