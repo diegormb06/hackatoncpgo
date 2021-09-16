@@ -15,7 +15,11 @@ export default abstract class BaseRepository implements IRepository {
 
   async findOne(id: number) {
     const data = await this.model.findOrFail(id);
-    return data.serialize();
+    return data.serialize({
+      fields: {
+        omit: ["password", "createdAt", "updatedAt"],
+      },
+    });
   }
 
   async update(id: number, newData: object) {

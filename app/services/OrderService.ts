@@ -7,7 +7,7 @@ export default class OrderService {
     return this.orderRepository.getAll();
   }
 
-  async showOrder(id: number) {
+  showOrder(id: number) {
     return await this.orderRepository.findOne(id);
   }
 
