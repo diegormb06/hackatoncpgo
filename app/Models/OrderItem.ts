@@ -16,7 +16,7 @@ export default class OrderItem extends BaseModel {
   public shopId: number;
 
   @column()
-  public title: number;
+  public title: string;
 
   @column()
   public unit_price: number;
@@ -29,6 +29,9 @@ export default class OrderItem extends BaseModel {
 
   @column()
   public total: number;
+
+  @column()
+  public status: string;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
