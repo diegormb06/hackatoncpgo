@@ -12,7 +12,7 @@ export default class UserRepository extends BaseRepository {
     ).serialize({
       relations: {
         user: {
-          fields: ["fullname", "cpf", "email", "phone"],
+          fields: ["fullName", "cpf", "email", "phone"],
         },
       },
     });
@@ -30,7 +30,7 @@ export default class UserRepository extends BaseRepository {
     ).serialize({
       relations: {
         user: {
-          fields: ["fullname", "cpf", "email", "phone"],
+          fields: ["fullName", "cpf", "email", "phone"],
         },
       },
     });

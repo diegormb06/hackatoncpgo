@@ -1,10 +1,10 @@
 import { DateTime } from "luxon";
 import {
-  BaseModel,
   BelongsTo,
+  HasMany,
+  BaseModel,
   belongsTo,
   column,
-  HasMany,
   hasMany,
 } from "@ioc:Adonis/Lucid/Orm";
 import OrderItem from "App/Models/OrderItem";
