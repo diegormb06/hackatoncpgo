@@ -1,10 +1,10 @@
-import Ws from "App/Services/WebSocket";
-Ws.boot();
+import WebSocket from "App/services/WebSocket";
+WebSocket.boot();
 
 /**
  * Listen for incoming socket connections
  */
-Ws.io.on("connection", (socket) => {
+WebSocket.io.on("connection", (socket) => {
   socket.emit("news", { hello: "world" });
 
   socket.on("my other event", (data) => {
