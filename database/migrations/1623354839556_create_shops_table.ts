@@ -6,7 +6,7 @@ export default class CreateShopsTable extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments("id").primary();
-      table.integer("user_id").unsigned();
+      table.integer("user_id").references("users.id").onDelete("CASCADE");
       table.string("name").unique();
       table.string("phone", 14);
       table.string("mobile_phone").nullable();
@@ -21,8 +21,6 @@ export default class CreateShopsTable extends BaseSchema {
       table.string("state").defaultTo("GO");
       table.string("country").defaultTo("Brasil");
       table.timestamps();
-
-      table.foreign("user_id").references("id").inTable("users");
     });
   }
 

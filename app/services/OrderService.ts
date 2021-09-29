@@ -8,7 +8,7 @@ export default class OrderService {
   }
 
   showOrder(id: number) {
-    return this.orderRepository.findOne(id);
+    return this.orderRepository.getOrder(id);
   }
 
   createOrder(data: object) {

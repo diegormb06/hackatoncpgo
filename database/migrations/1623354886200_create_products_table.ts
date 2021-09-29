@@ -6,8 +6,8 @@ export default class CreateProductsTables extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments("id").primary();
-      table.integer("shop_id");
-      table.integer("category_id");
+      table.integer("shop_id").references("shops.id").onDelete("CASCADE");
+      table.integer("category_id").references("categories.id");
       table.string("title");
       table.string("description");
       table.decimal("price", 10, 2);
@@ -15,9 +15,6 @@ export default class CreateProductsTables extends BaseSchema {
       table.integer("stars", 1);
       table.enum("status", ["await", "open", "delivering", "complete"]);
       table.timestamps();
-
-      table.foreign("category_id").references("id").inTable("categories");
-      table.foreign("shop_id").references("id").inTable("shops");
     });
   }
 

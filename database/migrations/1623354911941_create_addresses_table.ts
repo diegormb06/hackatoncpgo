@@ -6,7 +6,11 @@ export default class CreateAddressesTable extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments("id").primary();
-      table.integer("user_id").unsigned();
+      table
+        .integer("user_id")
+        .unsigned()
+        .references("users.id")
+        .onDelete("CASCADE");
       table.string("address").notNullable();
       table.string("zipcode").notNullable();
       table.string("number", 6);
@@ -17,8 +21,6 @@ export default class CreateAddressesTable extends BaseSchema {
       table.string("country");
       table.boolean("is_primary");
       table.timestamps();
-
-      table.foreign("user_id").references("users.id");
     });
   }
 

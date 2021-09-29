@@ -9,14 +9,12 @@ export default class UserRepository extends BaseRepository {
   async getAll() {
     const results = (
       await Order.query().preload("user").preload("items").paginate(1, 15)
-    ).serialize({
-      relations: {
-        user: {
-          fields: ["fullName", "cpf", "email", "phone"],
-        },
-      },
-    });
+    ).serialize();
     return { data: results.data, ...results.meta };
+  }
+
+  async getOrder(id: number) {
+    return Order.query().where("id", id).preload("user").preload("items");
   }
 
   async getOrdersByShop(shopId) {
@@ -27,13 +25,7 @@ export default class UserRepository extends BaseRepository {
           itemsQuery.where("shop_id", shopId);
         })
         .paginate(1, 15)
-    ).serialize({
-      relations: {
-        user: {
-          fields: ["fullName", "cpf", "email", "phone"],
-        },
-      },
-    });
+    ).serialize();
     return { data: results.data, ...results.meta };
   }
 }

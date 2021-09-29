@@ -9,7 +9,7 @@ export const OrderItemFactory = Factory.define(OrderItem, async ({ faker }) => {
   return {
     order_id: (await OrderFactory.create()).id,
     product_id: product.id,
-    title: product.title,
+    product_name: product.title,
     unit_price: 9.99,
     quantity: qty,
     discount: 10,

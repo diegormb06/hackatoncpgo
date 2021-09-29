@@ -14,8 +14,7 @@ export default class CreateUsersTable extends BaseSchema {
       table.string("phone", 14).notNullable();
       table.string("photo");
       table.enum("role", ["store", "admin", "user"]).defaultTo("user");
-      table.timestamp("created_at");
-      table.timestamp("updated_at");
+      table.timestamps();
     });
   }
 

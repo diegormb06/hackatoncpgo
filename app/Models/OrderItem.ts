@@ -10,13 +10,13 @@ export default class OrderItem extends BaseModel {
   public orderId: number;
 
   @column()
-  public productId: number;
+  public product_id: number;
+
+  @column()
+  public product_name: string;
 
   @column()
   public shopId: number;
-
-  @column()
-  public title: string;
 
   @column()
   public unit_price: number;

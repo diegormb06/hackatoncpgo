@@ -6,24 +6,21 @@ export default class CreateOrderItemsTable extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments("id").primary();
-      table.integer("order_id").unsigned();
-      table.integer("product_id").unsigned();
-      table.string("title");
+      table.string("product_name");
+      table.integer("product_id");
       table.float("unit_price", 8, 2);
       table.integer("quantity");
       table.integer("discount");
       table.float("total", 8, 2);
       table
+        .integer("order_id")
+        .unsigned()
+        .references("orders.id")
+        .onDelete("cascade");
+      table
         .enum("status", ["awaiting", "received", "delivering", "complete"])
         .defaultTo("awaiting");
       table.timestamps();
-
-      table
-        .foreign("order_id")
-        .references("id")
-        .inTable("orders")
-        .onDelete("cascade");
-      table.foreign("product_id").references("id").inTable("products");
     });
   }
 

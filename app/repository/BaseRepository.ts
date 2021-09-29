@@ -15,11 +15,7 @@ export default abstract class BaseRepository implements IRepository {
 
   async findOne(id: number) {
     const data = await this.model.findOrFail(id);
-    return data.serialize({
-      fields: {
-        omit: ["password", "createdAt", "updatedAt"],
-      },
-    });
+    return data.serialize();
   }
 
   async update(id: number, newData: object) {
@@ -32,6 +28,6 @@ export default abstract class BaseRepository implements IRepository {
   async delete(id: number) {
     let model = await this.model.findOrFail(id);
     model.delete();
-    return { message: "success" };
+    return { message: "user id " + id + " deleted" };
   }
 }
