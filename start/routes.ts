@@ -24,6 +24,7 @@ Route.get("/autofast/api", () => "Api is running");
 
 Route.group(() => {
   Route.post("/login", "AuthController.login");
+
   Route.resource("users", "UsersController").apiOnly();
   Route.resource("products", "ProductsController").apiOnly();
   Route.resource("shops", "ShopsController").apiOnly();
@@ -34,4 +35,6 @@ Route.group(() => {
   Route.post("uploads/images/:product_id", "ImagesController.uploadImages");
   Route.delete("uploads/images/:image_id", "ImagesController.deleteImages");
   Route.get("uploads/:type/:filename", "ImagesController.show");
+
+  Route.get("products/search", "ProductsController.search");
 }).prefix("/autofast/api");

@@ -5,6 +5,4 @@ export default class UserRepository extends BaseRepository {
   constructor() {
     super(User);
   }
-
-  getUserbyRole() {}
 }

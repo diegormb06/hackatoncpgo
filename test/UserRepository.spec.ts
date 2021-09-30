@@ -9,11 +9,10 @@ const userAttributes = [
   "id",
   "first_name",
   "last_name",
-  "password",
   "email",
   "cpf",
   "phone",
-  "photo",
+  "full_name",
   "created_at",
   "updated_at",
 ];
@@ -28,8 +27,15 @@ test.group("Test UserRepository", (group) => {
 
   test("UserRepository.create should create and returns an user", async (assert) => {
     const newUser = await UserFactory.makeStubbed();
-    delete newUser.$attributes.id;
-    const createdUser = await userRepository.create(newUser.serialize());
+    const { first_name, last_name, email, cpf, phone } = newUser.serialize();
+    const createdUser = await userRepository.create({
+      first_name,
+      last_name,
+      email,
+      cpf,
+      phone,
+      password: "12345678",
+    });
 
     assert.isObject(createdUser, "user data should be an object");
     assert.containsAllKeys(
@@ -63,28 +69,18 @@ test.group("Test UserRepository", (group) => {
 
   test("userRepository.findOne should return one user data", async (assert) => {
     const testUser = await UserFactory.create();
-    const foundUser = await userRepository.findOne(testUser.serialize().id);
+    const foundUser = await userRepository.findOne(testUser.id);
+
     assert.isOk(foundUser, "findOne should return an truthy value");
-    assert.containsAllKeys(
-      foundUser,
-      userAttributes,
-      "found user has all user attributes"
-    );
-    assert.ownInclude(
-      testUser.serialize(),
-      foundUser,
-      "found user is equal to testUser"
-    );
+    assert.equal(testUser.id, foundUser.id, "found user is equal to testUser");
   });
 
   test("userRepository.update should update an user data", async (assert) => {
     const testUser = await UserFactory.create();
     const newTestUserData = await UserFactory.makeStubbed();
-    const { updatedAt, password, ...newData } = newTestUserData.serialize();
-    const updatedUser = await userRepository.update(
-      testUser.serialize().id,
-      newData
-    );
+    const { updatedAt, password, full_name, ...newData } =
+      newTestUserData.serialize();
+    const updatedUser = await userRepository.update(testUser.id, newData);
 
     assert.isOk(updatedUser);
     assert.ownInclude(updatedUser.serialize(), newData);
@@ -94,7 +90,7 @@ test.group("Test UserRepository", (group) => {
     const testUser = await UserFactory.create();
     const deleteResponse = await userRepository.delete(testUser.id);
     const tryFindUser = await User.find(testUser.id);
-    assert.ownInclude(deleteResponse, { message: "success" });
+    assert.ownInclude(deleteResponse, { message: `deleted with success` });
     assert.isNull(tryFindUser);
   });
 });

@@ -83,6 +83,6 @@ test.group("Test ShopRepository", () => {
     const testShop = await ShopFactory.create();
     const deleteResponse = await shopRepository.delete(testShop.id);
 
-    assert.ownInclude(deleteResponse, { message: "success" });
+    assert.ownInclude(deleteResponse, { message: `deleted with success` });
   });
 });

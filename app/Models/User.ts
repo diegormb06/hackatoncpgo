@@ -54,7 +54,7 @@ export default class User extends BaseModel {
   }
 
   @computed()
-  public get fullName() {
+  public get full_name() {
     return `${this.firstName} ${this.lastName}`;
   }
 

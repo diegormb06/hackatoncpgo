@@ -78,6 +78,6 @@ test.group("Test AddressRepository", () => {
     const testAddress = await AddressFactory.create();
     const deleteResponse = await addressRepository.delete(testAddress.id);
 
-    assert.ownInclude(deleteResponse, { message: "success" });
+    assert.ownInclude(deleteResponse, { message: `deleted with success` });
   });
 });

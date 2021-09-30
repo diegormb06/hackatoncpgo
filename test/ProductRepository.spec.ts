@@ -1,6 +1,7 @@
 import test from "japa";
 import ProductRepository from "App/repository/ProductRepository";
 import { ProductFactory } from "Database/factories/productFactory";
+import Product from "App/Models/Product";
 const productRepository = new ProductRepository();
 
 const productAttributes = [
@@ -18,8 +19,9 @@ const productAttributes = [
 ];
 
 test.group("Test ProductRepository", () => {
-  test("ProductRepository.create should create and returns an product", async (assert) => {
+  test.only("ProductRepository.create should create and returns an product", async (assert) => {
     const newProduct = await ProductFactory.makeStubbed();
+    console.log(newProduct.serialize());
     delete newProduct.$attributes.id;
     const createdProduct = await productRepository.create(
       newProduct.$attributes
@@ -53,9 +55,7 @@ test.group("Test ProductRepository", () => {
 
   test("productRepository.findOne should return one product data", async (assert) => {
     const testProduct = await ProductFactory.create();
-    const foundProduct = await productRepository.findOne(
-      testProduct.serialize().id
-    );
+    const foundProduct = await productRepository.findOne(testProduct.id);
 
     assert.isOk(foundProduct, "findOne should return an truthy value");
     assert.containsAllKeys(foundProduct, productAttributes);
@@ -78,7 +78,9 @@ test.group("Test ProductRepository", () => {
   test("productRepository.delete should delete a product", async (assert) => {
     const testProduct = await ProductFactory.create();
     const deleteResponse = await productRepository.delete(testProduct.id);
+    const testFind = await Product.find(testProduct.id);
 
-    assert.ownInclude(deleteResponse, { message: "success" });
+    assert.isNull(testFind);
+    assert.ownInclude(deleteResponse, { message: `deleted with success` });
   });
 });

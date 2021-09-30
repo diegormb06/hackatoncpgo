@@ -9,7 +9,7 @@ const orderAttributes = [
   "ship_address",
   "freight",
   "total_value",
-  "status"
+  "status",
 ];
 
 test.group("Test OrderRepository", () => {
@@ -70,6 +70,6 @@ test.group("Test OrderRepository", () => {
     const testOrder = await OrderFactory.create();
     const deleteResponse = await orderRepository.delete(testOrder.id);
 
-    assert.ownInclude(deleteResponse, { message: "success" });
+    assert.ownInclude(deleteResponse, { message: `deleted with success` });
   });
 });

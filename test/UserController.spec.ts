@@ -3,7 +3,7 @@ import supertest from "supertest";
 import { UserFactory } from "Database/factories/userFactory";
 import Database from "@ioc:Adonis/Lucid/Database";
 const BASE_URL = `http://${process.env.HOST}:${process.env.PORT}`;
-const api = supertest(BASE_URL + "/api");
+const api = supertest(BASE_URL + "/autofast/api");
 
 test.group("Test UserController", (group) => {
   group.beforeEach(async () => {
@@ -15,15 +15,20 @@ test.group("Test UserController", (group) => {
   });
 
   test("POST /users - should create a user", async (assert) => {
-    const newUserMock = await UserFactory.makeStubbed();
-    delete newUserMock.$attributes.id;
-
+    let newUserMock = (await UserFactory.makeStubbed()).serialize();
+    const { first_name, last_name, email, cpf, phone } = newUserMock;
     const { body } = await api
       .post("/users")
-      .send(newUserMock.$attributes)
+      .send({ first_name, last_name, email, password: "12345678", cpf, phone })
       .expect(200);
 
-    assert.containsAllKeys(body, newUserMock.serialize());
+    assert.containsAllKeys(body, [
+      "first_name",
+      "last_name",
+      "email",
+      "cpf",
+      "phone",
+    ]);
   });
 
   test("GET /users - should get all users", async (assert) => {
@@ -58,6 +63,6 @@ test.group("Test UserController", (group) => {
       .delete(`/users/${testUser.$attributes.id}`)
       .expect(200);
     assert.isObject(res.body);
-    assert.ownInclude(res.body, { message: "success" });
+    assert.ownInclude(res.body, { message: `deleted with success` });
   });
 });
