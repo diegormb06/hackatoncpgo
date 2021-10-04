@@ -23,4 +23,9 @@ export default class ProductsController {
   public async destroy({ params }: http) {
     return this.productService.deleteProduct(params.id);
   }
+
+  public async searchProduct({ request }: http) {
+    const queryString = request.qs();
+    return this.productService.searchProduct(queryString);
+  }
 }

@@ -13,7 +13,7 @@ export default class CreateProductsTables extends BaseSchema {
       table.decimal("price", 10, 2);
       table.integer("stock_quantity");
       table.integer("stars", 1);
-      table.enum("status", ["await", "open", "delivering", "complete"]);
+      table.enum("status", ["active", "inactive"]).defaultTo("active");
       table.timestamps();
     });
   }

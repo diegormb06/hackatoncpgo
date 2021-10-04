@@ -22,4 +22,8 @@ export default class ProductService {
   deleteProduct(id: number) {
     return this.productRepository.delete(id);
   }
+
+  searchProduct(qs: Record<string, any>) {
+    return this.productRepository.search(qs);
+  }
 }

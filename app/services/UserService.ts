@@ -23,4 +23,8 @@ export default class UserService implements IUserService {
   deleteUser(id: number) {
     return this.userRepository.delete(id);
   }
+
+  searchUser(qs: Record<string, any>) {
+    return this.userRepository.search(qs);
+  }
 }

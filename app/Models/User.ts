@@ -32,6 +32,9 @@ export default class User extends BaseModel {
   public password: string;
 
   @column()
+  public role: string;
+
+  @column()
   public cpf: string;
 
   @column()

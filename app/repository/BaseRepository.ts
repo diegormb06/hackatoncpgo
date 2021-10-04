@@ -30,4 +30,15 @@ export default abstract class BaseRepository implements IRepository {
     model.delete();
     return { message: "deleted with success" };
   }
+
+  async search(qs: Record<string, any>) {
+    let results;
+    for (const prop in qs) {
+      console.log("qs." + prop + " = " + qs[prop]);
+      results = this.model.where(function () {
+        this.where(prop, "LIKE", `%${qs[prop]}%`);
+      });
+    }
+    return await results.exec();
+  }
 }
