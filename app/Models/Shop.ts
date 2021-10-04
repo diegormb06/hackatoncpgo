@@ -56,6 +56,9 @@ export default class Shop extends BaseModel {
   @column()
   public country: string;
 
+  @column()
+  public status: string;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 

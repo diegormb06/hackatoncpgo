@@ -3,27 +3,27 @@ import ShopRepository from "App/repository/ShopRepository";
 export default class ShopService {
   private ShopRepository: ShopRepository = new ShopRepository();
 
-  getUsers() {
+  getShops() {
     return this.ShopRepository.getAll();
   }
 
-  async showUser(id: number) {
+  async showShop(id: number) {
     return await this.ShopRepository.findOne(id);
   }
 
-  createUser(data: object) {
+  createShop(data: object) {
     return this.ShopRepository.create(data);
   }
 
-  updateUser(id: number, data: object) {
+  updateShop(id: number, data: object) {
     return this.ShopRepository.update(id, data);
   }
 
-  deleteUser(id: number) {
+  deleteShop(id: number) {
     return this.ShopRepository.delete(id);
   }
 
-  searchUser(qs: Record<string, any>) {
+  searchShop(qs: Record<string, any>) {
     return this.ShopRepository.search(qs);
   }
 }
