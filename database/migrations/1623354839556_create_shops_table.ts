@@ -20,7 +20,7 @@ export default class CreateShopsTable extends BaseSchema {
       table.string("city", 50);
       table.string("state").defaultTo("GO");
       table.string("country").defaultTo("Brasil");
-      table.enum("status", ["active", "inactive"]);
+      table.enum("status", ["active", "inactive"]).defaultTo("inactive");
       table.timestamps();
     });
   }
