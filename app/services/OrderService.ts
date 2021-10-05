@@ -11,8 +11,8 @@ export default class OrderService {
     return this.orderRepository.getOrder(id);
   }
 
-  createOrder(data: object) {
-    return this.orderRepository.create(data);
+  createOrder(orderData: any) {
+    return this.orderRepository.createOrder(orderData);
   }
 
   updateOrder(id: number, data: object) {
@@ -21,5 +21,9 @@ export default class OrderService {
 
   deleteOrder(id: number) {
     return this.orderRepository.delete(id);
+  }
+
+  getOrdersByShop(shopId: number) {
+    return this.orderRepository.getOrdersByShop(shopId);
   }
 }

@@ -17,6 +17,14 @@ export default class UserRepository extends BaseRepository {
     return Order.query().where("id", id).preload("user").preload("items");
   }
 
+  async createOrder(orderData) {
+    console.log(orderData);
+    const { items, ...newOrderData } = orderData;
+    const newOrder = await Order.create(newOrderData);
+    newOrder.related("items").saveMany(items);
+    return this.getOrder(newOrder.id);
+  }
+
   async getOrdersByShop(shopId) {
     const results = (
       await Order.query()

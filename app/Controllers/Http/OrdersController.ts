@@ -2,7 +2,7 @@ import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
 import OrderService from "App/services/OrderService";
 
 export default class OrdersController {
-  public orderService = new OrderService();
+  public readonly orderService: OrderService = new OrderService();
 
   public async index() {
     return this.orderService.getOrder();
@@ -22,5 +22,9 @@ export default class OrdersController {
 
   public async destroy({ params }: http) {
     return this.orderService.deleteOrder(params.id);
+  }
+
+  public async getOrdersByShop({ params }: http) {
+    return this.orderService.getOrdersByShop(params.shop_id);
   }
 }

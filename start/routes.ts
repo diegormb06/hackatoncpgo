@@ -30,12 +30,16 @@ Route.group(() => {
 Route.group(() => {
   Route.resource("products", "ProductsController").apiOnly();
   Route.get("/searchProduct", "ProductsController.searchProduct");
+  Route.post("registerUser", "UsersController.store");
 }).prefix("/api");
 
 Route.group(() => {
   Route.resource("users", "UsersController").apiOnly();
+  Route.resource("address", "AddressesController").apiOnly();
   Route.resource("shops", "ShopsController").apiOnly();
+
   Route.resource("orders", "OrdersController").apiOnly();
+  Route.get("/getOrdersByShop/:shop_id", "OrdersController.getOrdersByShop");
 
   Route.post("uploads/photo/:user_id", "ImagesController.uploadPhoto");
   Route.delete("uploads/photo/:user_id", "ImagesController.deletePhoto");

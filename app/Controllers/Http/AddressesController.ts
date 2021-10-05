@@ -1,13 +1,27 @@
-// import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
+import AddressService from "App/services/AddressService";
 
 export default class AddressesController {
-  public async index() {}
+  private readonly addressService: AddressService = new AddressService();
 
-  public async store() {}
+  public async index() {
+    return this.addressService.getAddress();
+  }
 
-  public async show() {}
+  public async store({ request }: http) {
+    console.log("dados do endereço", request.all());
+    return this.addressService.createAddress(request.all());
+  }
 
-  public async update() {}
+  public async show({ params }: http) {
+    return this.addressService.show(params.id);
+  }
 
-  public async destroy() {}
+  public async update({ params, request }: http) {
+    return this.addressService.updateAddress(request.all(), params.id);
+  }
+
+  public async destroy({ params }: http) {
+    return this.addressService.deleteAddress(params.id);
+  }
 }
