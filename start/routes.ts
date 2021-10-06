@@ -20,7 +20,7 @@
 
 import Route from "@ioc:Adonis/Core/Route";
 
-Route.get("/api", () => "Api is running");
+Route.get("/api", () => "Api is running --version: 0.0.2");
 
 Route.group(() => {
   Route.post("/login", "AuthController.login");
