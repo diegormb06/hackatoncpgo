@@ -15,8 +15,8 @@ export default class AddressService {
     return this.addressRepository.create(addressData);
   }
 
-  updateAddress(addressData, addressId) {
-    return this.addressRepository.update(addressData, addressId);
+  updateAddress(addressId: number, addressData: {}) {
+    return this.addressRepository.update(addressId, addressData);
   }
 
   deleteAddress(addressId) {

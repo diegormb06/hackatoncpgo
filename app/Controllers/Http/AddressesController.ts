@@ -18,7 +18,7 @@ export default class AddressesController {
   }
 
   public async update({ params, request }: http) {
-    return this.addressService.updateAddress(request.all(), params.id);
+    return this.addressService.updateAddress(params.id, request.all());
   }
 
   public async destroy({ params }: http) {
