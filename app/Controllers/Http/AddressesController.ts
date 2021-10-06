@@ -9,7 +9,6 @@ export default class AddressesController {
   }
 
   public async store({ request }: http) {
-    console.log("dados do endereço", request.all());
     return this.addressService.createAddress(request.all());
   }
 
