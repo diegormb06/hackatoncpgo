@@ -35,14 +35,17 @@ export default abstract class BaseRepository implements IRepository {
     }
   }
 
-  async search(qs: Record<string, any>) {
-    let results;
-    for (const prop in qs) {
-      console.log("qs." + prop + " = " + qs[prop]);
-      results = this.model.where(function () {
-        this.where(prop, "LIKE", `%${qs[prop]}%`);
-      });
+  async search(qs: any) {
+    try {
+      const query = this.model.query();
+      for (const prop in qs) {
+        prop.match(/^\w+_id/gm)
+          ? query.where(prop, qs[prop])
+          : query.where(prop, "ILIKE", `%${qs[prop]}%`);
+      }
+      return query;
+    } catch (e) {
+      return e;
     }
-    return await results.exec();
   }
 }

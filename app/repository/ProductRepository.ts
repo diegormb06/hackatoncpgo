@@ -12,4 +12,20 @@ export default class UserRepository extends BaseRepository {
     ).serialize();
     return { data: results.data, ...results.meta };
   }
+
+  async search(qs: Record<string, any>) {
+    try {
+      const query = Product.query();
+
+      for (const prop in qs) {
+        prop.match(/^\w+_id/gm)
+          ? query.where(prop, qs[prop])
+          : query.where(prop, "ILIKE", `%${qs[prop]}%`);
+      }
+
+      return query;
+    } catch (e) {
+      return e;
+    }
+  }
 }

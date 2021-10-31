@@ -7,9 +7,10 @@ export default class AuthController {
     const password = request.input("password");
 
     try {
-      return await auth.use("api").attempt(email, password);
+      const { token } = await auth.use("api").attempt(email, password);
+      const user = auth.user.serialize();
+      return { ...user, token };
     } catch (error) {
-      console.log(error);
       return response.badRequest(error.message);
     }
   }
@@ -18,18 +19,16 @@ export default class AuthController {
     const email = request.input("email");
     const password = request.input("password");
 
-    // Lookup user manually
     const user = await User.query()
       .where("email", email)
-      .whereNot("role", "admin")
+      .where("role", "admin")
+      .orWhere("role", "store")
       .firstOrFail();
 
-    // Verify password
     if (!(await Hash.verify(user.password, password))) {
       return response.badRequest("Invalid credentials");
     }
 
-    // Generate token
     return await auth.use("api").generate(user);
   }
 }
