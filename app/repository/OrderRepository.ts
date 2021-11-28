@@ -18,11 +18,11 @@ export default class UserRepository extends BaseRepository {
   }
 
   async createOrder(orderData) {
-    console.log(orderData);
     const { items, ...newOrderData } = orderData;
     const newOrder = await Order.create(newOrderData);
+    console.log("items da ordem", items);
     newOrder.related("items").saveMany(items);
-    return this.getOrder(newOrder.id);
+    // return this.getOrder(newOrder.id);
   }
 
   async getOrdersByShop(shopId) {
