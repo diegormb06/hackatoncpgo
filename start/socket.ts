@@ -5,7 +5,7 @@ WebSocket.boot();
  * Listen for incoming socket connections
  */
 WebSocket.io.on("connection", (socket) => {
-  socket.emit("news", { hello: "world" });
+  socket.emit("news", { AutoFast: "Conectado!" });
 
   socket.on("my other event", (data) => {
     console.log(data);

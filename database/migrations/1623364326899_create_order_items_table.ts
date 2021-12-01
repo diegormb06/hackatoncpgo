@@ -8,6 +8,7 @@ export default class CreateOrderItemsTable extends BaseSchema {
       table.increments("id").primary();
       table.string("product_name");
       table.integer("product_id");
+      table.integer("shop_id");
       table.float("unit_price", 8, 2);
       table.integer("quantity");
       table.integer("discount");

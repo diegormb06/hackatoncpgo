@@ -17,11 +17,10 @@ jobs:
         cache: 'npm'
 
     - name: Instalando dependencias
-    - run: npm install
+      run: npm install
 
     - name: Gerando build
-    - run: npm run build --if-present
+      run: npm run build --if-present
 
     - name: Instalando dependencias de produção
-    - run: cd ../../build/
-    - run: npm ci --production
+      run: npm ci --production
