@@ -18,6 +18,7 @@ export default class AppProvider {
 
   public async ready() {
     if (this.app.environment === "web") {
+      console.log("log environment", this.app.environment);
       await import("../start/socket");
     }
   }
