@@ -41,4 +41,14 @@ export default class AuthController {
 
     }
   }
+
+  public async authenticate({auth, response}) {
+    try {
+      await auth.use('api').authenticate();
+
+    } catch (error) {
+      response.status(403).json({error: "Não Autorizado"});
+    }
+
+  }
 }
