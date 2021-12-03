@@ -1,4 +1,5 @@
 import OrderRepository from "../repository/OrderRepository";
+import WebSocket from "App/services/WebSocket";
 
 export default class OrderService {
   private readonly orderRepository: OrderRepository = new OrderRepository();
@@ -11,8 +12,10 @@ export default class OrderService {
     return this.orderRepository.getOrder(id);
   }
 
-  createOrder(orderData: any) {
-    return this.orderRepository.createOrder(orderData);
+  async createOrder(orderData: any) {
+    const newOrder = await this.orderRepository.createOrder(orderData);
+    WebSocket.io.emit("new:order", newOrder);
+    return newOrder;
   }
 
   updateOrder(id: number, data: object) {
