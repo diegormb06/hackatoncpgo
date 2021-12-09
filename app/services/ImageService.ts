@@ -38,7 +38,8 @@ export default class ImageService implements ImagesServiceInterface {
   async uploadImages(product_id: number, images: MultipartFileContract[]) {
     try {
       const productImageRepository = new ProductImageRepository();
-
+      console.log(images);
+      
       for (let image of images) {
         const imageName = `${cuid()}.${image.extname}`;
         await image.move(Application.makePath("uploads/images"), {

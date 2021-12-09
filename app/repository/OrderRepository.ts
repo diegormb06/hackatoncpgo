@@ -8,7 +8,11 @@ export default class UserRepository extends BaseRepository {
 
   async getAll() {
     const results = (
-      await Order.query().preload("user").preload("items").paginate(1, 15)
+      await Order.query()
+        .preload("user")
+        .preload("items")
+        .orderBy("create_at", "desc")
+        .paginate(1, 15)
     ).serialize();
     return { data: results.data, ...results.meta };
   }
