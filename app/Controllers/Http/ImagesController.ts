@@ -12,15 +12,13 @@ export default class ImagesController {
     return imageService.uploadPhoto(params.user_id, file);
   }
 
-  public async uploadImages({ request, response, params }: http) {
-    // const images = request.files("images", {
-    //   size: "2mb",
-    //   extnames: ["jpg", "png", "gif"],
-    // });
-
+  public uploadImages({ response }: http) {
+    console.log("parametros: test");
+    // const images = request.files("images");
+    return response.json("teste");
     // const serviceReturn = imageService.uploadImages(params.product_id, images);
-
-    return response.json("chegou aqui");
+    // console.log(images);
+    // return imageService.uploadImages(params.id, images);
   }
 
   public async deletePhoto({ params }: http) {
