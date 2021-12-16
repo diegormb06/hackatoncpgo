@@ -36,11 +36,9 @@ export default class ImageService {
   }
 
   async uploadImages(product_id: number, images: MultipartFileContract[]) {
-    console.log("chegou aqui");
+    let createdImages: String[] = [];
     try {
       const productImageRepository = new ProductImageRepository();
-      console.log(images);
-
       for (let image of images) {
         const imageName = `${cuid()}.${image.extname}`;
         await image.move(Application.makePath("uploads/images"), {
@@ -50,9 +48,10 @@ export default class ImageService {
           product_id: product_id,
           path: imageName,
         });
+        createdImages.push(imageName);
       }
 
-      return { message: "upload success" };
+      return createdImages;
     } catch (e) {
       return e.message;
     }

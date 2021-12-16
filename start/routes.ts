@@ -48,5 +48,6 @@ Route.group(() => {
   Route.delete("uploads/images/:image_id", "ImagesController.deleteImages");
 
   Route.get("uploads/:type/:filename", "ImagesController.show");
-}).prefix("/api");
-// .middleware("auth");
+})
+  .prefix("/api")
+  .middleware("auth");
