@@ -25,12 +25,14 @@ Route.get("/api", () => "Api is running --version: 0.0.2");
 Route.group(() => {
   Route.post("/login", "AuthController.login");
   Route.post("/admin", "AuthController.adminLogin");
+  Route.post("/authenticate", "AuthController.authenticate");
 }).prefix("/api/auth");
 
 Route.group(() => {
   Route.resource("products", "ProductsController").apiOnly();
   Route.get("/searchProduct", "ProductsController.searchProduct");
   Route.post("registerUser", "UsersController.store");
+  Route.get("uploads/:type/:filename", "ImagesController.show");
 }).prefix("/api");
 
 Route.group(() => {
@@ -45,8 +47,6 @@ Route.group(() => {
   Route.delete("uploads/photo/:user_id", "ImagesController.deletePhoto");
   Route.post("uploads/images/:product_id", "ImagesController.uploadImages");
   Route.delete("uploads/images/:image_id", "ImagesController.deleteImages");
-
-  Route.get("uploads/:type/:filename", "ImagesController.show");
 })
   .prefix("/api")
   .middleware("auth");

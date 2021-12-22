@@ -1,12 +1,12 @@
 import Application from "@ioc:Adonis/Core/Application";
 import UserRepository from "../repository/UserRepository";
-import ImagesServiceInterface from "Contracts/interfaces/ImagesServiceInterface";
+// import ImagesServiceInterface from "Contracts/interfaces/ImagesServiceInterface";
 import { MultipartFileContract } from "@ioc:Adonis/Core/BodyParser";
 import ProductImageRepository from "App/repository/ProductImageRepository";
 import cuid from "cuid";
 import fs from "fs";
 
-export default class ImageService implements ImagesServiceInterface {
+export default class ImageService {
   async uploadPhoto(user_id: number, newImage: MultipartFileContract) {
     const newPhoto = `${cuid()}.${newImage.extname}`;
 
@@ -36,9 +36,9 @@ export default class ImageService implements ImagesServiceInterface {
   }
 
   async uploadImages(product_id: number, images: MultipartFileContract[]) {
+    let createdImages: String[] = [];
     try {
       const productImageRepository = new ProductImageRepository();
-
       for (let image of images) {
         const imageName = `${cuid()}.${image.extname}`;
         await image.move(Application.makePath("uploads/images"), {
@@ -48,9 +48,10 @@ export default class ImageService implements ImagesServiceInterface {
           product_id: product_id,
           path: imageName,
         });
+        createdImages.push(imageName);
       }
 
-      return { message: "upload success" };
+      return createdImages;
     } catch (e) {
       return e.message;
     }

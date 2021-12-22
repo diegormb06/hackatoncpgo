@@ -12,12 +12,9 @@ export default class ImagesController {
     return imageService.uploadPhoto(params.user_id, file);
   }
 
-  public async uploadImages({ request, params }: http) {
-    const images = request.files("images", {
-      size: "2mb",
-      extnames: ["jpg", "png", "gif"],
-    });
-
+  public uploadImages({ request, params }: http) {
+    const images = request.files("images");
+    if (!images) return "não foi localizado imagens";
     return imageService.uploadImages(params.product_id, images);
   }
 
