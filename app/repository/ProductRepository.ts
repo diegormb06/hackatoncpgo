@@ -16,14 +16,17 @@ export default class UserRepository extends BaseRepository {
   async search(qs: Record<string, any>) {
     try {
       const query = Product.query();
+      const props = Object.keys(qs);
 
-      for (const prop in qs) {
-        prop.match(/^\w+_id/gm)
-          ? query.where(prop, qs[prop])
-          : query.where(prop, "ILIKE", `%${qs[prop]}%`);
+      for (const prop of props) {
+        if(prop.match(/^\w+_id/gm)) {
+          query.where(prop, qs[prop])
+        } else {
+          query.where(prop, "ILIKE", `%${qs[prop]}%`);
+        }
       }
 
-      return query;
+      return query.paginate(1, 10)
     } catch (e) {
       return e;
     }

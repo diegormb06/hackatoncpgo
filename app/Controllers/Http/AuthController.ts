@@ -10,7 +10,7 @@ export default class AuthController {
       const { token } = await auth.use("api").attempt(email, password);
       const user = auth.user.serialize();
       return { ...user, token };
-    } catch (error.message) {
+    } catch (error) {
       console.log(error);
       return response.badRequest(error.message);
     }
