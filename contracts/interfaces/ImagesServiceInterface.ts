@@ -7,4 +7,5 @@ export default interface ImagesServiceInterface {
     product_id: number,
     imageFiles: MultipartFileContract[] | null
   ): any;
+  deleteProductImage(image_id): string
 }

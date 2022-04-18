@@ -1,6 +1,5 @@
 import Application from "@ioc:Adonis/Core/Application";
 import UserRepository from "../repository/UserRepository";
-// import ImagesServiceInterface from "Contracts/interfaces/ImagesServiceInterface";
 import { MultipartFileContract } from "@ioc:Adonis/Core/BodyParser";
 import ProductImageRepository from "App/repository/ProductImageRepository";
 import cuid from "cuid";
@@ -44,10 +43,12 @@ export default class ImageService {
         await image.move(Application.makePath("uploads/images"), {
           name: imageName,
         });
+        
         await productImageRepository.create({
-          product_id: product_id,
+          product_id,
           path: imageName,
         });
+
         createdImages.push(imageName);
       }
 
@@ -55,5 +56,17 @@ export default class ImageService {
     } catch (e) {
       return e.message;
     }
+  }
+
+  async deleteProductImage(image_id: number) {
+    const imageRepository = new ProductImageRepository();
+    const productImage = await imageRepository.findOne(image_id);
+
+    fs.access(Application.makePath("uploads/images/" + productImage.path), (err: any) => {
+      if (!err) fs.unlinkSync(Application.makePath("uploads/images/" + productImage.path));
+    });
+
+    await imageRepository.delete(image_id);
+    return `imagem ${productImage.path} deletada`
   }
 }

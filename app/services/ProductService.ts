@@ -11,8 +11,8 @@ export default class ProductService {
     return await this.productRepository.findOne(id);
   }
 
-  createProduct(data: object) {
-    return this.productRepository.create(data);
+  async createProduct(data: object) {
+    return  await this.productRepository.create(data);
   }
 
   updateProduct(id: number, data: object) {
