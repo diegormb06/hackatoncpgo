@@ -43,7 +43,7 @@ export default class ImageService {
         await image.move(Application.makePath("uploads/images"), {
           name: imageName,
         });
-        
+
         await productImageRepository.create({
           product_id,
           path: imageName,
@@ -62,11 +62,17 @@ export default class ImageService {
     const imageRepository = new ProductImageRepository();
     const productImage = await imageRepository.findOne(image_id);
 
-    fs.access(Application.makePath("uploads/images/" + productImage.path), (err: any) => {
-      if (!err) fs.unlinkSync(Application.makePath("uploads/images/" + productImage.path));
-    });
+    fs.access(
+      Application.makePath("uploads/images/" + productImage.path),
+      (err: any) => {
+        if (!err)
+          fs.unlinkSync(
+            Application.makePath("uploads/images/" + productImage.path)
+          );
+      }
+    );
 
     await imageRepository.delete(image_id);
-    return `imagem ${productImage.path} deletada`
+    return `imagem ${productImage.path} deletada`;
   }
 }
