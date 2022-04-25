@@ -1,7 +1,6 @@
-import IUserService from "Contracts/interfaces/userService";
 import UserRepository from "App/repository/UserRepository";
 
-export default class UserService implements IUserService {
+export default class UserService {
   private userRepository: UserRepository = new UserRepository();
 
   getUsers() {

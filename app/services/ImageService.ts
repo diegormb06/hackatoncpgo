@@ -10,7 +10,7 @@ export default class ImageService {
     const newPhoto = `${cuid()}.${newImage.extname}`;
 
     const userRepository = new UserRepository();
-    const userPhoto = (await userRepository.findOne(user_id)).photo;
+    const userPhoto = (await userRepository.findOne(user_id))?.photo;
 
     if (userPhoto)
       fs.unlinkSync(Application.makePath("uploads/photos/" + userPhoto));
@@ -26,7 +26,7 @@ export default class ImageService {
 
   async deletePhoto(user_id: number) {
     const userRepository = new UserRepository();
-    const userPhoto = (await userRepository.findOne(user_id)).photo;
+    const userPhoto = (await userRepository.findOne(user_id))?.photo;
 
     if (userPhoto)
       fs.unlinkSync(Application.makePath("uploads/photos/" + userPhoto));

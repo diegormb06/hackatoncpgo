@@ -10,6 +10,4 @@ export default class UserRepository extends BaseRepository {
     const data = await User.query().where('id', id).preload("shop").first();
     return data?.serialize();
   }
-
-  // .query().preload("images")
 }
