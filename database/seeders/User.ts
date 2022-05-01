@@ -3,7 +3,7 @@ import { UserFactory } from "Database/factories/userFactory";
 
 export default class UserSeeder extends BaseSeeder {
   public async run() {
-    await UserFactory.apply("role").create();
-    await UserFactory.createMany(2);
+    // await UserFactory.apply("role").create();
+    // await UserFactory.createMany(2);
   }
 }

@@ -11,8 +11,8 @@ export default class UserService {
     return await this.userRepository.findOne(id);
   }
 
-  createUser(data: object) {
-    return this.userRepository.create(data);
+  async createUser(data: object) {
+    return await this.userRepository.create(data);
   }
 
   updateUser(id: number, data: object) {

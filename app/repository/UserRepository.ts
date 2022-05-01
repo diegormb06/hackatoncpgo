@@ -1,5 +1,6 @@
 import User from "App/Models/User";
 import BaseRepository from "App/repository/BaseRepository";
+import { UserType } from "Contracts/interfaces/userService";
 
 export default class UserRepository extends BaseRepository {
   constructor() {
@@ -7,7 +8,7 @@ export default class UserRepository extends BaseRepository {
   }
 
   async findOne(id: number) {
-    const data = await User.query().where('id', id).preload("shop").first();
-    return data?.serialize();
+    const data = await User.query().where("id", id).preload("shop").first();
+    return data?.serialize() as UserType;
   }
 }

@@ -9,7 +9,7 @@ export type UserType = {
   password: string;
   cpf: string;
   phone: string;
-  photo: string | null;
+  photo?: string;
   created_at: string;
   updated_at: string;
 };
@@ -19,5 +19,5 @@ export default interface IUserService {
   showUser(id: number): Promise<UserType>;
   createUser(data: object): Promise<UserType>;
   updateUser(id: number, data: object): Promise<UserType>;
-  deleteUser(id: number): Promise<{ message: string; }>;
+  deleteUser(id: number): Promise<{ message: string }>;
 }

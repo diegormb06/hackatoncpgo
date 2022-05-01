@@ -1,18 +1,25 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
 import UserService from "App/services/UserService";
 import CreateUserValidator from "App/Validators/CreateUserValidator";
+import AuthController from "./AuthController";
 
 export default class UsersController {
   private readonly userService: UserService = new UserService();
+  private readonly authController = new AuthController();
 
   public async index() {
     return this.userService.getUsers();
   }
 
-  public async store({ request }: http) {
+  public async store({ auth, request, response }: http) {
     const newUser = request.all();
     await request.validate(CreateUserValidator);
-    return this.userService.createUser(newUser);
+    try {
+      await this.userService.createUser(newUser);
+      return this.authController.login({ auth, request, response });
+    } catch {
+      return "Não foi possível criar o usuário";
+    }
   }
 
   public async show({ params }: http) {
