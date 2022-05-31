@@ -4,8 +4,9 @@ import ProductService from "App/services/ProductService";
 export default class ProductsController {
   private readonly productService: ProductService = new ProductService();
 
-  public async index() {
-    return this.productService.getProduct();
+  public async index({ request }: http) {
+    const currentPage = request.input("page", 1);
+    return this.productService.getProduct(currentPage);
   }
 
   public async store({ request }: http) {

@@ -17,7 +17,8 @@ export default class ShopsController {
   }
 
   public async update({ params, request }: http) {
-    return this.shopService.updateShop(params.id, request.all());
+    const shopData = request.all();
+    return this.shopService.updateShop(params.id, shopData);
   }
 
   public async destroy({ params }: http) {

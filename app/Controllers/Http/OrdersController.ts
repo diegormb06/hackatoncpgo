@@ -9,7 +9,8 @@ export default class OrdersController {
   }
 
   public async store({ request }: http) {
-    return this.orderService.createOrder(request.all());
+    const newOrderData = request.all();
+    return this.orderService.createOrder(newOrderData);
   }
 
   public async show({ params }: http) {

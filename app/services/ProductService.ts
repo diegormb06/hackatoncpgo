@@ -3,8 +3,8 @@ import ProductRepository from "../repository/ProductRepository";
 export default class ProductService {
   private readonly productRepository: ProductRepository = new ProductRepository();
 
-  getProduct() {
-    return this.productRepository.getAll();
+  getProduct(page) {
+    return this.productRepository.getAll(page);
   }
 
   async showProduct(id: number) {

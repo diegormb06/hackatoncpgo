@@ -8,8 +8,8 @@ export default abstract class BaseRepository implements IRepository {
     return newData.serialize();
   }
 
-  async getAll() {
-    const results = (await this.model.query().paginate(1, 10)).serialize();
+  async getAll(page = 1) {
+    const results = (await this.model.query().paginate(page, 10)).serialize();
     return { data: results.data, ...results.meta };
   }
 

@@ -6,9 +6,9 @@ export default class UserRepository extends BaseRepository {
     super(Product);
   }
 
-  async getAll() {
+  async getAll(page: number) {
     const results = (
-      await Product.query().preload("images").paginate(1, 10)
+      await Product.query().preload("images").paginate(page, 10)
     ).serialize();
     return { data: results.data, ...results.meta };
   }
@@ -19,14 +19,14 @@ export default class UserRepository extends BaseRepository {
       const props = Object.keys(qs);
 
       for (const prop of props) {
-        if(prop.match(/^\w+_id/gm)) {
-          query.where(prop, qs[prop])
+        if (prop.match(/^\w+_id/gm)) {
+          query.where(prop, qs[prop]);
         } else {
           query.where(prop, "ILIKE", `%${qs[prop]}%`);
         }
       }
 
-      return query.paginate(1, 10)
+      return query.preload("images").paginate(1, 10);
     } catch (e) {
       return e;
     }
