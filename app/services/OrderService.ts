@@ -2,7 +2,7 @@ import OrderRepository from "../repository/OrderRepository";
 import WebSocket from "App/services/WebSocket";
 
 export default class OrderService {
-  private readonly orderRepository: OrderRepository = new OrderRepository();
+  constructor(private readonly orderRepository: OrderRepository) {}
 
   getOrder() {
     return this.orderRepository.getAll();

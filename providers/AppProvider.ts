@@ -10,6 +10,8 @@ export default class AppProvider {
       "Services/ImageServices",
       () => new ImageService()
     );
+
+    this.app.container.call
   }
 
   public async boot() {

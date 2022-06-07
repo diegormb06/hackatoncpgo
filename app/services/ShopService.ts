@@ -26,4 +26,5 @@ export default class ShopService {
   searchShop(qs: Record<string, any>) {
     return this.ShopRepository.search(qs);
   }
+
 }

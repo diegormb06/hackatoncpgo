@@ -1,8 +1,10 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
+import ShopRepository from "App/repository/ShopRepository";
 import ShopService from "App/services/ShopService";
 
 export default class ShopsController {
   private readonly shopService: ShopService = new ShopService();
+  private readonly shopRepository: ShopRepository = new ShopRepository();
 
   public async index() {
     return this.shopService.getShops();
@@ -23,5 +25,10 @@ export default class ShopsController {
 
   public async destroy({ params }: http) {
     return this.shopService.deleteShop(params.id);
+  }
+
+  public async getProductsByShop({ params }: http) {
+    const { shopId, page } = params;
+    return this.shopRepository.getProductsByShop(shopId, page);
   }
 }

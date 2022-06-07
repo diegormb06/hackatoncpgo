@@ -39,7 +39,8 @@ Route.group(() => {
   Route.resource("users", "UsersController").apiOnly();
   Route.resource("address", "AddressesController").apiOnly();
   Route.resource("shops", "ShopsController").apiOnly();
-
+  Route.get("shops/:id/products", "ShopsController");
+  
   Route.resource("orders", "OrdersController").apiOnly();
   Route.get("/getOrdersByShop/:shop_id", "OrdersController.getOrdersByShop");
 
