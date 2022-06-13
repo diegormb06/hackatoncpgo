@@ -27,8 +27,15 @@ export default class ShopsController {
     return this.shopService.deleteShop(params.id);
   }
 
-  public async getProductsByShop({ params }: http) {
-    const { shopId, page } = params;
+  public async getProductsByShop({ params, request }: http) {
+    const { shopId } = params;
+    const page = request.input("page", 1);
     return this.shopRepository.getProductsByShop(shopId, page);
+  }
+
+  public async getOrdersByShop({ params, request }: http) {
+    const { shopId } = params;
+    const page = request.input("page", 1);
+    return this.shopRepository.getOrdersByShop(shopId, page);
   }
 }

@@ -10,4 +10,9 @@ export default class ShopRepository extends BaseRepository {
     const shop = await Shop.findOrFail(shopId);
     return await shop.related("products").query().paginate(page, 10);
   }
+
+  async getOrdersByShop(shopId, page) {
+    const shop = await Shop.findOrFail(shopId);
+    return shop.related("orders").query().paginate(page, 10);
+  }
 }

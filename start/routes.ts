@@ -39,10 +39,10 @@ Route.group(() => {
   Route.resource("users", "UsersController").apiOnly();
   Route.resource("address", "AddressesController").apiOnly();
   Route.resource("shops", "ShopsController").apiOnly();
-  Route.get("shops/:id/products", "ShopsController");
-  
+  Route.get("shops/:shopId/products", "ShopsController.getProductsByShop");
+  Route.get("shops/:shopId/orders", "OrdersController.getOrdersByShop");
+
   Route.resource("orders", "OrdersController").apiOnly();
-  Route.get("/getOrdersByShop/:shop_id", "OrdersController.getOrdersByShop");
 
   Route.post("uploads/photo/:user_id", "ImagesController.uploadPhoto");
   Route.delete("uploads/photo/:user_id", "ImagesController.deletePhoto");

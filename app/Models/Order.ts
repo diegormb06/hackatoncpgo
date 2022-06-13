@@ -12,6 +12,7 @@ import {
 import OrderItem from "App/Models/OrderItem";
 import User from "App/Models/User";
 import Address from "App/Models/Address";
+import Shop from "./Shop";
 
 export default class Order extends BaseModel {
   @column({ isPrimary: true })
@@ -43,6 +44,9 @@ export default class Order extends BaseModel {
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>;
+
+  @belongsTo(() => Shop)
+  public shop: BelongsTo<typeof Shop>;
 
   @hasOne(() => Address)
   public address: HasOne<typeof Address>;

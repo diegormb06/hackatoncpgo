@@ -11,7 +11,7 @@ export default class UserRepository extends BaseRepository {
       await Order.query()
         .preload("user")
         .preload("items")
-        .orderBy("create_at", "desc")
+        .orderBy("created_at", "desc")
         .paginate(1, 15)
     ).serialize();
     return { data: results.data, ...results.meta };

@@ -9,6 +9,7 @@ import {
 } from "@ioc:Adonis/Lucid/Orm";
 import User from "App/Models/User";
 import Product from "App/Models/Product";
+import Order from "./Order";
 
 export default class Shop extends BaseModel {
   @column({ isPrimary: true })
@@ -70,4 +71,7 @@ export default class Shop extends BaseModel {
 
   @hasMany(() => Product)
   public products: HasMany<typeof Product>;
+
+  @hasMany(() => Order)
+  public orders: HasMany<typeof Order>;
 }
