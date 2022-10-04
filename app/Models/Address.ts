@@ -33,6 +33,9 @@ export default class Address extends BaseModel {
   @column()
   public country: string;
 
+  @column()
+  public isPrimary: boolean;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 

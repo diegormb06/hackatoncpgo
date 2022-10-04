@@ -1,6 +1,6 @@
-import IRepository from "Contracts/interfaces/repository";
+import Repository from "Contracts/interfaces/repository";
 
-export default abstract class BaseRepository implements IRepository {
+export default abstract class BaseRepository implements Repository {
   protected constructor(private model) {}
 
   async create(data: object) {

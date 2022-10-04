@@ -17,8 +17,8 @@ export default class UsersController {
     try {
       await this.userService.createUser(newUser);
       return this.authController.login({ auth, request, response });
-    } catch {
-      return "Não foi possível criar o usuário";
+    } catch (error) {
+      response.badRequest({ error: "Verifique os dados" });
     }
   }
 

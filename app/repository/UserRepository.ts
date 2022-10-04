@@ -8,7 +8,11 @@ export default class UserRepository extends BaseRepository {
   }
 
   async findOne(id: number) {
-    const data = await User.query().where("id", id).preload("shop").first();
+    const data = await User.query()
+      .where("id", id)
+      .preload("shop")
+      .preload("address")
+      .first();
     return data?.serialize() as UserType;
   }
 }
