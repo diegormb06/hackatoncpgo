@@ -1,6 +1,6 @@
-const stripe = require("stripe")(
-  "sk_test_51LoxazGsxDaSwFKwGfasj4WSbJLJKw7aNh7PNlXjR1W56fI6bCNJeDMmNNZOPJRtXwAGzsmidklrltFJic2ZJNNV00fUowpGBl"
-);
+import { PaymentRequest } from "App/domain/entities/PaymentRequest";
+import Env from "@ioc:Adonis/Core/Env";
+const stripe = require("stripe")(Env.get("STRIPE_KEY"));
 
 export class PaymentService {
   public async pay(paymentData: PaymentRequest) {
@@ -12,12 +12,14 @@ export class PaymentService {
     );
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1099,
-      currency: "eur",
+      amount: paymentData.total_value,
+      currency: "brl",
       customer: customer.id,
+      description: `Venda para o usuário ${paymentData.user_id} de ${paymentData.total_quantity} items no valor de ${paymentData.total_value}`,
       automatic_payment_methods: {
         enabled: true,
       },
+      metadata: paymentData,
     });
 
     return {

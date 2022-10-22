@@ -22,13 +22,13 @@ export default class Order extends BaseModel {
   public userId: number;
 
   @column()
-  public ship_address: number;
-
-  @column()
   public freight: number;
 
   @column()
   public total_value: number;
+
+  @column()
+  public total_quant: number;
 
   @column()
   public status: string;
@@ -49,5 +49,5 @@ export default class Order extends BaseModel {
   public shop: BelongsTo<typeof Shop>;
 
   @hasOne(() => Address)
-  public address: HasOne<typeof Address>;
+  public ship_address: HasOne<typeof Address>;
 }

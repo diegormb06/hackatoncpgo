@@ -6,13 +6,14 @@ export default class CreateOrdersTables extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments("id").primary();
-      table.integer("user_id").unsigned().references("users.id");
+      table.integer("user_id").unsigned().references("users.id").notNullable();
       table.integer("ship_address").unsigned().references("addresses.id");
       table.float("freight", 8, 2).defaultTo(9.99);
       table.float("total_value", 8, 2).notNullable();
+      table.integer("total_quantity").notNullable();
       table
-        .enum("status", ["awaiting", "received", "delivering", "complete"])
-        .defaultTo("awaiting");
+        .enum("status", ["new", "received", "delivering", "complete"])
+        .defaultTo("new");
       table.timestamps();
     });
   }

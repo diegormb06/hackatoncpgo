@@ -1,4 +1,4 @@
-import { schema, rules } from "@ioc:Adonis/Core/Validator";
+import { schema } from "@ioc:Adonis/Core/Validator";
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 
 export default class PaymentRequestValidator {
@@ -24,19 +24,31 @@ export default class PaymentRequestValidator {
    *    ```
    */
   public schema = schema.create({
-    token: schema.string(),
-    issuer_id: schema.string(),
-    payment_method_id: schema.string(),
-    transaction_amount: schema.number(),
-    installments: schema.number(),
-    description: schema.string(),
-    payer: schema.object().members({
-      email: schema.string({}, [rules.email()]),
-      identification: schema.object().members({
-        type: schema.string(),
-        number: schema.string(),
-      }),
+    user_id: schema.number(),
+    freight: schema.number(),
+    total_value: schema.number(),
+    installments: schema.number.optional(),
+    total_quantity: schema.number(),
+    ship_address: schema.object().members({
+      id: schema.number(),
+      user_id: schema.number(),
+      zipcode: schema.number(),
+      address: schema.string(),
+      number: schema.string(),
+      complement: schema.string.optional(),
+      district: schema.string(),
+      city: schema.string(),
+      state: schema.string(),
     }),
+    items: schema.array().members(
+      schema.object().members({
+        product_id: schema.string(),
+        product_name: schema.string(),
+        unit_price: schema.number(),
+        quantity: schema.number(),
+        total: schema.number(),
+      })
+    ),
   });
 
   /**
