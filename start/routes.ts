@@ -33,6 +33,8 @@ Route.group(() => {
   Route.get("/searchProducts", "ProductsController.searchProduct");
   Route.post("registerUser", "UsersController.store");
   Route.get("uploads/:type/:filename", "ImagesController.show");
+
+  Route.post("payment-status", "PaymentController.savePaymentData");
 }).prefix("/api");
 
 Route.group(() => {
@@ -49,7 +51,7 @@ Route.group(() => {
   Route.post("uploads/images/:product_id", "ImagesController.uploadImages");
   Route.delete("uploads/images/:image_id", "ImagesController.deleteImages");
 
-  Route.post("payment", "PaymentController.receivePayment");
+  Route.post("payment", "PaymentController.createPaymentIntent");
 })
   .prefix("/api")
   .middleware("auth");

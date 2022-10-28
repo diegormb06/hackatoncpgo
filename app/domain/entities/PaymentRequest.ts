@@ -1,8 +1,11 @@
 import { Address } from "./Address";
+import { User } from "./User";
+
 import { OrderProduct } from "./OrderProduct";
 
 export type PaymentRequest = {
-  user_id: string;
+  order_id: number;
+  user: User;
   ship_address: Address;
   freight: number;
   total_value: number;

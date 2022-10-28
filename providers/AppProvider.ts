@@ -5,13 +5,16 @@ export default class AppProvider {
 
   public async register() {
     // Register your own bindings
-    const ImageService = (await import("App/services/ImageService")).default;
+    const imageService = (
+      await import("App/services/ImageService")
+    ).default;
+
     this.app.container.singleton(
       "Services/ImageServices",
-      () => new ImageService()
+      () => new imageService()
     );
 
-    this.app.container.call
+    this.app.container.call;
   }
 
   public async boot() {
@@ -20,7 +23,6 @@ export default class AppProvider {
 
   public async ready() {
     if (this.app.environment === "web") {
-      console.log("log environment", this.app.environment);
       await import("../start/socket");
     }
   }

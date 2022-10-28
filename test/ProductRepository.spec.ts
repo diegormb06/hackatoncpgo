@@ -32,7 +32,7 @@ test.group("Test ProductRepository", () => {
   });
 
   test("productRepository.getAll should return an array of product and paginate data", async (assert) => {
-    const products = await productRepository.getAll();
+    const products = await productRepository.getAll(1);
     assert.isOk(products, "getAll return truthy value");
     assert.containsAllKeys(
       products,

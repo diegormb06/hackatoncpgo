@@ -1,10 +1,23 @@
 import { PaymentRequest } from "App/domain/entities/PaymentRequest";
 import Env from "@ioc:Adonis/Core/Env";
 const stripe = require("stripe")(Env.get("STRIPE_KEY"));
+import Logger from "@ioc:Adonis/Core/Logger";
+
+const loggerTag = "PaymentService";
 
 export class PaymentService {
-  public async pay(paymentData: PaymentRequest) {
-    const customer = await stripe.customers.create();
+  public async createPaymentIntent(paymentData: PaymentRequest) {
+    const { user } = paymentData;
+
+    Logger.info(
+      `[${loggerTag}] Criando 'payment intent' para usuário id ${user.id}`
+    );
+
+    const customer = await stripe.customers.create({
+      name: `${user.first_name} ${user.last_name}`,
+      email: user.email,
+      phone: user.phone,
+    });
 
     const ephemeralKey = await stripe.ephemeralKeys.create(
       { customer: customer.id },
@@ -12,15 +25,29 @@ export class PaymentService {
     );
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: paymentData.total_value,
+      amount: paymentData.total_value * 100,
       currency: "brl",
       customer: customer.id,
-      description: `Venda para o usuário ${paymentData.user_id} de ${paymentData.total_quantity} items no valor de ${paymentData.total_value}`,
+      description: `Pedido n° ${paymentData.order_id}: usuário id: ${user.id} de ${paymentData.total_quantity} items no valor de R$${paymentData.total_value}`,
       automatic_payment_methods: {
         enabled: true,
       },
-      metadata: paymentData,
+      metadata: { order_id: paymentData.order_id },
+      shipping: {
+        name: `${user.first_name} ${user.last_name}`,
+        phone: user.phone,
+        address: {
+          city: paymentData.ship_address.city,
+          state: paymentData.ship_address.state,
+          postal_code: paymentData.ship_address.zipcode,
+          line1: paymentData.ship_address.address,
+          line2: paymentData.ship_address.complement,
+          country: "Brasil",
+        },
+      },
     });
+
+    Logger.info(`[${loggerTag}] payment intent id: ${paymentIntent.id} criado`);
 
     return {
       paymentIntent: paymentIntent.client_secret,
