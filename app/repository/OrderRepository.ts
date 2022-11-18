@@ -1,5 +1,6 @@
 import BaseRepository from "App/repository/BaseRepository";
 import Order from "App/Models/Order";
+import { OrderStatus } from "App/domain/enums/OrderStatus";
 
 export default class UserRepository extends BaseRepository {
   constructor() {
@@ -11,6 +12,7 @@ export default class UserRepository extends BaseRepository {
       await Order.query()
         .preload("user")
         .preload("items")
+        .preload("ship_address")
         .orderBy("created_at", "desc")
         .paginate(1, 15)
     ).serialize();
@@ -22,6 +24,7 @@ export default class UserRepository extends BaseRepository {
       .where("id", id)
       .preload("user")
       .preload("items")
+      .preload("ship_address")
       .first();
   }
 
@@ -30,6 +33,13 @@ export default class UserRepository extends BaseRepository {
     const newOrder = await Order.create(newOrderData);
     await newOrder.related("items").createMany(items);
     return this.getOrder(newOrder.id);
+  }
+
+  async updateOrderStatus(id: number, status: OrderStatus) {
+    let data = await Order.findOrFail(id);
+    data.merge({ status });
+    await data.save();
+    return status;
   }
 
   async getOrdersByShop(shopId) {

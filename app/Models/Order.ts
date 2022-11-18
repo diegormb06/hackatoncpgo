@@ -13,6 +13,7 @@ import OrderItem from "App/Models/OrderItem";
 import User from "App/Models/User";
 import Address from "App/Models/Address";
 import Shop from "./Shop";
+import { OrderStatus } from "App/domain/enums/OrderStatus";
 
 export default class Order extends BaseModel {
   @column({ isPrimary: true })
@@ -20,9 +21,6 @@ export default class Order extends BaseModel {
 
   @column()
   public userId: number;
-
-  @column()
-  public ship_address: number;
 
   @column()
   public freight: number;
@@ -34,7 +32,7 @@ export default class Order extends BaseModel {
   public total_quantity: number;
 
   @column()
-  public status: string;
+  public status: OrderStatus;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
@@ -52,5 +50,5 @@ export default class Order extends BaseModel {
   public shop: BelongsTo<typeof Shop>;
 
   @hasOne(() => Address)
-  public address: HasOne<typeof Address>;
+  public ship_address: HasOne<typeof Address>;
 }

@@ -28,4 +28,8 @@ export default class OrdersController {
   public async destroy({ params }: http) {
     return this.orderService.deleteOrder(params.id);
   }
+
+  public async updateStatus({ params }: http) {
+    return this.orderService.updateOrderStatus(params.orderId, params.status);
+  }
 }

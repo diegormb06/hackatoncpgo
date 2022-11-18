@@ -16,7 +16,7 @@ export default class UsersController {
     await request.validate(CreateUserValidator);
     try {
       await this.userService.createUser(newUser);
-      return this.authController.login({ auth, request, response });
+      return this.authController.login({ auth, request, response } as http);
     } catch (error) {
       response.badRequest({ error: "Verifique os dados" });
     }

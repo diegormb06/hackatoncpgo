@@ -20,7 +20,7 @@
 
 import Route from "@ioc:Adonis/Core/Route";
 
-Route.get("/api", () => "Api is running --version: 0.0.2");
+Route.get("/api", () => "O bambu ta gemeeeendo 1.0");
 
 Route.group(() => {
   Route.post("/login", "AuthController.login");
@@ -45,12 +45,15 @@ Route.group(() => {
   Route.get("shops/:shopId/orders", "OrdersController.getOrdersByShop");
 
   Route.resource("orders", "OrdersController").apiOnly();
+  Route.put(
+    "/orders/update-status/:orderId/:status",
+    "OrdersController.updateStatus"
+  );
 
   Route.post("uploads/photo/:user_id", "ImagesController.uploadPhoto");
   Route.delete("uploads/photo/:user_id", "ImagesController.deletePhoto");
   Route.post("uploads/images/:product_id", "ImagesController.uploadImages");
   Route.delete("uploads/images/:image_id", "ImagesController.deleteImages");
-
   Route.post("payment", "PaymentController.createPaymentIntent");
 })
   .prefix("/api")

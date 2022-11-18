@@ -1,5 +1,6 @@
 import OrderRepository from "../repository/OrderRepository";
 import WebSocket from "App/services/WebSocket";
+import { OrderStatus } from "App/domain/enums/OrderStatus";
 
 export default class OrderService {
   constructor(private readonly orderRepository: OrderRepository) {}
@@ -20,6 +21,12 @@ export default class OrderService {
 
   updateOrder(id: number, data: object) {
     return this.orderRepository.update(id, data);
+  }
+
+  updateOrderStatus(id: number, status: OrderStatus) {
+    this.orderRepository.update(id, { status });
+    WebSocket.io.emit(`update:order-${id}`, status);
+    return true;
   }
 
   deleteOrder(id: number) {
