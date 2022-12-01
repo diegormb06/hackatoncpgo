@@ -7,7 +7,7 @@ export default class CreateOrdersTables extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments("id").primary();
       table.integer("user_id").unsigned().references("users.id").notNullable();
-      table.integer("ship_address").unsigned().references("addresses.id");
+      table.integer("ship_address").notNullable();
       table.float("freight", 8, 2).defaultTo(9.99);
       table.float("total_value", 8, 2).notNullable();
       table.integer("total_quantity").notNullable();

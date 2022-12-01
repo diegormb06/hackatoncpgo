@@ -6,12 +6,10 @@ import {
   belongsTo,
   column,
   hasMany,
-  hasOne,
-  HasOne,
 } from "@ioc:Adonis/Lucid/Orm";
 import OrderItem from "App/Models/OrderItem";
 import User from "App/Models/User";
-import Address from "App/Models/Address";
+
 import Shop from "./Shop";
 import { OrderStatus } from "App/domain/enums/OrderStatus";
 
@@ -34,6 +32,9 @@ export default class Order extends BaseModel {
   @column()
   public status: OrderStatus;
 
+  @column()
+  public ship_address: number;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 
@@ -48,7 +49,4 @@ export default class Order extends BaseModel {
 
   @belongsTo(() => Shop)
   public shop: BelongsTo<typeof Shop>;
-
-  @hasOne(() => Address)
-  public ship_address: HasOne<typeof Address>;
 }

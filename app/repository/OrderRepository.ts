@@ -12,7 +12,6 @@ export default class UserRepository extends BaseRepository {
       await Order.query()
         .preload("user")
         .preload("items")
-        .preload("ship_address")
         .orderBy("created_at", "desc")
         .paginate(1, 15)
     ).serialize();
@@ -24,7 +23,6 @@ export default class UserRepository extends BaseRepository {
       .where("id", id)
       .preload("user")
       .preload("items")
-      .preload("ship_address")
       .first();
   }
 
