@@ -1,6 +1,7 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
 import ShopRepository from "App/repository/ShopRepository";
 import ShopService from "App/services/ShopService";
+import CreateShopValidator from "App/Validators/CreateShopValidator";
 
 export default class ShopsController {
   private readonly shopService: ShopService = new ShopService();
@@ -11,7 +12,9 @@ export default class ShopsController {
   }
 
   public async store({ request }: http) {
-    return this.shopService.createShop(request.all());
+    await request.validate(CreateShopValidator);
+    const newShopData = request.all() as Shop;
+    return this.shopService.createShop(newShopData);
   }
 
   public async show({ params }: http) {

@@ -1,7 +1,9 @@
 import ShopRepository from "App/repository/ShopRepository";
+import { PaymentService } from "./PaymentService";
 
 export default class ShopService {
   private ShopRepository: ShopRepository = new ShopRepository();
+  private PaymentGatewayService: PaymentService = new PaymentService();
 
   getShops() {
     return this.ShopRepository.getAll();
@@ -11,8 +13,12 @@ export default class ShopService {
     return await this.ShopRepository.findOne(id);
   }
 
-  createShop(data: object) {
-    return this.ShopRepository.create(data);
+  async createShop(data: Shop) {
+    const paymentGatewayAccount =
+      await this.PaymentGatewayService.createShopAccount(data);
+
+    const newShopData = { ...data, payment_account: paymentGatewayAccount.id };
+    return this.ShopRepository.create(newShopData);
   }
 
   updateShop(id: number, data: object) {
@@ -26,5 +32,4 @@ export default class ShopService {
   searchShop(qs: Record<string, any>) {
     return this.ShopRepository.search(qs);
   }
-
 }

@@ -17,9 +17,8 @@ export default class CreateOrderItemsTable extends BaseSchema {
         .integer("order_id")
         .unsigned()
         .references("orders.id")
-        .onDelete("cascade");
       table
-        .enum("status", ["awaiting", "received", "delivering", "complete"])
+        .enum("status", ["new", "received", "delivering", "complete"])
         .defaultTo("awaiting");
       table.timestamps();
     });

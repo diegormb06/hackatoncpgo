@@ -19,5 +19,6 @@ export default class CreateUserValidator {
   public messages = {
     "email.unique": "O email informado já está sendo usado",
     "cpf.unique": "O cpf informado já está sendo usado",
+    required: "O campo {{ field }} é obrigatório",
   };
 }

@@ -28,7 +28,7 @@ export default class UserRepository extends BaseRepository {
 
       return query.preload("images").paginate(1, 10);
     } catch (e) {
-      return e;
+      return [];
     }
   }
 }

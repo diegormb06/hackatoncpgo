@@ -46,7 +46,7 @@ export default class Shop extends BaseModel {
   public complement: string;
 
   @column()
-  public district: string;
+  public neighborhood: string;
 
   @column()
   public city: string;

@@ -1,6 +1,6 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
 import { PaymentRequest } from "App/domain/entities/PaymentRequest";
-import { PaymentService } from "App/services/PaymentStrypeService";
+import { PaymentService } from "App/services/PaymentService";
 import PaymentRequestValidator from "App/Validators/PaymentRequestValidator";
 import Logger from "@ioc:Adonis/Core/Logger";
 
