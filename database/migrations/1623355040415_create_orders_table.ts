@@ -1,5 +1,4 @@
 import BaseSchema from "@ioc:Adonis/Lucid/Schema";
-
 export default class CreateOrdersTables extends BaseSchema {
   protected tableName = "orders";
 

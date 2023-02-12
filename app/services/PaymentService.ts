@@ -61,7 +61,7 @@ export class PaymentService {
   public async createShopAccount(shopData: Shop) {
     try {
       const account = await stripe.accounts.create({
-        type: "custom",
+        type: "express",
         company: {
           name: shopData.name,
           address: {
@@ -82,15 +82,27 @@ export class PaymentService {
         },
       });
 
+      const accountLink = await stripe.accountLinks.create({
+        account: account.id,
+        refresh_url: "https://api.autofastapp.com/reauth",
+        return_url: "https://api.autofastapp.com/return",
+        type: "account_onboarding",
+      });
+
       Logger.info(
         `[${loggerTag}] Loja id ${account.id} criada no stripe com sucesso`
       );
 
-      return account;
+      return { account, accountLink };
     } catch (error) {
       Logger.error(
         `[${loggerTag}] Erro ao criar loja ${shopData.name} no Stripe`
       );
+      return null;
     }
+  }
+
+  removePaymentAccount(accountId: string) {
+    return stripe.accounts.del(accountId);
   }
 }

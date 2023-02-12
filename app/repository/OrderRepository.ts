@@ -1,6 +1,7 @@
 import BaseRepository from "App/repository/BaseRepository";
 import Order from "App/Models/Order";
 import { OrderStatus } from "App/domain/enums/OrderStatus";
+import Database from "@ioc:Adonis/Lucid/Database";
 
 export default class UserRepository extends BaseRepository {
   constructor() {
@@ -27,10 +28,17 @@ export default class UserRepository extends BaseRepository {
   }
 
   async createOrder(orderData) {
-    const { items, ...newOrderData } = orderData;
-    const newOrder = await Order.create(newOrderData);
-    await newOrder.related("items").createMany(items);
-    return this.getOrder(newOrder.id);
+    const trx = await Database.transaction();
+
+    try {
+      const { items, ...newOrderData } = orderData;
+      const newOrder = await Order.create(newOrderData, { client: trx });
+      await newOrder.related("items").createMany(items);
+      return this.getOrder(newOrder.id);
+    } catch (error) {
+      await trx.rollback();
+      throw error;
+    }
   }
 
   async updateOrderStatus(id: number, status: OrderStatus) {

@@ -32,7 +32,7 @@ export default class AuthController {
         .firstOrFail();
 
       if (!(await Hash.verify(user.password, password))) {
-        return response.badRequest("Invalid credentials");
+        return response.forbidden("Invalid credentials");
       }
 
       const { token } = await auth.use("api").attempt(email, password);
@@ -40,7 +40,7 @@ export default class AuthController {
 
       return { ...userInfo, token };
     } catch (error) {
-      return response.status(401).json({ error: "not authorized" });
+      return response.status(401).json({ error: "Não Autorizado" });
     }
   }
 

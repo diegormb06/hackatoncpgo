@@ -60,6 +60,9 @@ export default class Shop extends BaseModel {
   @column()
   public status: string;
 
+  @column()
+  public payment_account: string;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 
