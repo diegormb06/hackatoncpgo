@@ -28,7 +28,7 @@ export default class ShopService {
 
     const newShop = await this.ShopRepository.create(newShopData);
 
-    if (!newShop) {
+    if (!newShop.id) {
       await this.PaymentGatewayService.removePaymentAccount(
         paymentGatewayAccount.account.id
       );
