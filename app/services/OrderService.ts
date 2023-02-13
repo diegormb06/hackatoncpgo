@@ -15,6 +15,9 @@ export default class OrderService {
 
   async createOrder(orderData: any) {
     const newOrder = await this.orderRepository.createOrder(orderData);
+
+    if (!newOrder) throw new Error("Error creating order");
+
     WebSocket.io.emit("new:order", newOrder);
     return newOrder;
   }

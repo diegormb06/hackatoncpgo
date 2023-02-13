@@ -34,7 +34,10 @@ export default class UserRepository extends BaseRepository {
       const { items, ...newOrderData } = orderData;
       const newOrder = await Order.create(newOrderData, { client: trx });
       await newOrder.related("items").createMany(items);
-      return this.getOrder(newOrder.id);
+      await trx.commit();
+
+      const createdOrder = await this.getOrder(newOrder.id);
+      return createdOrder;
     } catch (error) {
       await trx.rollback();
       throw error;
