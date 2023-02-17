@@ -3,7 +3,7 @@ import Order from "App/Models/Order";
 import { OrderStatus } from "App/domain/enums/OrderStatus";
 import Database from "@ioc:Adonis/Lucid/Database";
 
-export default class UserRepository extends BaseRepository {
+export default class OrderRepository extends BaseRepository {
   constructor() {
     super(Order);
   }
@@ -61,5 +61,12 @@ export default class UserRepository extends BaseRepository {
         .paginate(1, 15)
     ).serialize();
     return { data: results.data, ...results.meta };
+  }
+
+  async countOrders() {
+    const orders = await Database.rawQuery(
+      "select status, count (id) from orders GROUP BY status;"
+    );
+    return orders["rows"];
   }
 }

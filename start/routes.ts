@@ -45,6 +45,8 @@ Route.group(() => {
   Route.get("shops/:shopId/orders", "OrdersController.getOrdersByShop");
 
   Route.resource("orders", "OrdersController").apiOnly();
+  Route.get("/order-stats", "OrdersController.orderStats");
+
   Route.put(
     "/orders/update-status/:orderId/:status",
     "OrdersController.updateStatus"

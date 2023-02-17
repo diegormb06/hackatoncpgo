@@ -5,9 +5,7 @@ export default class AppProvider {
 
   public async register() {
     // Register your own bindings
-    const imageService = (
-      await import("App/services/ImageService")
-    ).default;
+    const imageService = (await import("App/services/ImageService")).default;
 
     this.app.container.singleton(
       "Services/ImageServices",

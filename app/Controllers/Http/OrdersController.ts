@@ -1,12 +1,15 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
 import OrderRepository from "App/repository/OrderRepository";
-import OrderService from "App/services/OrderService";
+import IOrderService from "Contracts/interfaces/IOrderService";
 const orderRepository: OrderRepository = new OrderRepository();
 
 export default class OrdersController {
-  public readonly orderService: OrderService = new OrderService(
-    orderRepository
-  );
+  constructor(private orderService: IOrderService) {}
+
+  public async orderStats() {
+    const orders = await orderRepository.countOrders();
+    return orders;
+  }
 
   public async index() {
     return this.orderService.getOrder();
