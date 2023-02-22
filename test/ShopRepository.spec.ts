@@ -1,5 +1,5 @@
 import test from "japa";
-import ShopRepository from "App/repository/ShopRepository";
+import ShopRepository from "App/Repositories/ShopRepository";
 import { ShopFactory } from "Database/factories/shopFactory";
 const shopRepository = new ShopRepository();
 
@@ -56,7 +56,7 @@ test.group("Test ShopRepository", () => {
       ],
       "Shop data should contains all required attributes"
     );
-    assert.isArray(shops.data, "data should be an array");
+    assert.isArray(shops.all, "data should be an array");
   });
 
   test("ShopRepository.findOne should return a shop data", async (assert) => {

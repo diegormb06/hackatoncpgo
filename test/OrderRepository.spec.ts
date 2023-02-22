@@ -1,5 +1,5 @@
 import test from "japa";
-import OrderRepository from "App/repository/OrderRepository";
+import OrderRepository from "App/Repositories/OrderRepository";
 import { OrderFactory } from "Database/factories/orderFactory";
 const orderRepository = new OrderRepository();
 

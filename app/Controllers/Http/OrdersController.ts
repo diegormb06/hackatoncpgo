@@ -1,18 +1,17 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
-import OrderRepository from "App/repository/OrderRepository";
-import IOrderService from "Contracts/interfaces/IOrderService";
-const orderRepository: OrderRepository = new OrderRepository();
+import OrderServices from "@ioc:Api/OrderServices";
+import { IOrderServices } from "Contracts/interfaces/IOrderServices";
 
 export default class OrdersController {
-  constructor(private orderService: IOrderService) {}
+  constructor(private readonly orderService: IOrderServices = OrderServices) {}
 
   public async orderStats() {
-    const orders = await orderRepository.countOrders();
+    const orders = await this.orderService.getOrderStats();
     return orders;
   }
 
-  public async index() {
-    return this.orderService.getOrder();
+  public async index({ params }: http) {
+    return this.orderService.getAllOrders(params.page);
   }
 
   public async store({ request }: http) {
@@ -21,7 +20,7 @@ export default class OrdersController {
   }
 
   public async show({ params }: http) {
-    return this.orderService.showOrder(params.id);
+    return this.orderService.findOrder(params.id);
   }
 
   public async update({ params, request }: http) {

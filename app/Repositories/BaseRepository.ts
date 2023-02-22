@@ -1,6 +1,4 @@
-import Repository from "Contracts/interfaces/repository";
-
-export default abstract class BaseRepository implements Repository {
+export default abstract class BaseRepository {
   protected constructor(private model) {}
 
   async create(data: object) {
@@ -29,7 +27,7 @@ export default abstract class BaseRepository implements Repository {
     let model = await this.model.findOrFail(id);
     try {
       model.delete();
-      return { message: "deleted with success" };
+      return true;
     } catch (e) {
       return e.message;
     }

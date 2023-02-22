@@ -1,7 +1,11 @@
 import Shop from "App/Models/Shop";
-import BaseRepository from "App/repository/BaseRepository";
+import BaseRepository from "App/Repositories/BaseRepository";
+import IShopRepository from "Contracts/interfaces/IShopRepository";
 
-export default class ShopRepository extends BaseRepository {
+export default class ShopRepository
+  extends BaseRepository
+  implements IShopRepository
+{
   constructor() {
     super(Shop);
   }
@@ -15,7 +19,7 @@ export default class ShopRepository extends BaseRepository {
     return shop;
   }
 
-  async getAll(page: number) {
+  async getAll(page: number = 1) {
     const shops = await Shop.query().preload("user").paginate(page, 10);
     return shops;
   }

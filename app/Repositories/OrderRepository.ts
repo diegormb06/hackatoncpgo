@@ -1,22 +1,25 @@
-import BaseRepository from "App/repository/BaseRepository";
 import Order from "App/Models/Order";
 import { OrderStatus } from "App/domain/enums/OrderStatus";
 import Database from "@ioc:Adonis/Lucid/Database";
+import { IOrderRepository } from "Contracts/interfaces/IOrderRepository";
+import BaseRepository from "./BaseRepository";
 
-export default class OrderRepository extends BaseRepository {
+export default class OrderRepository
+  extends BaseRepository
+  implements IOrderRepository
+{
   constructor() {
     super(Order);
   }
 
   async getAll() {
-    const results = (
-      await Order.query()
-        .preload("user")
-        .preload("items")
-        .orderBy("created_at", "desc")
-        .paginate(1, 15)
-    ).serialize();
-    return { data: results.data, ...results.meta };
+    const ordersList = await Order.query()
+      .preload("user")
+      .preload("items")
+      .orderBy("created_at", "desc")
+      .paginate(1, 15);
+
+    return ordersList;
   }
 
   async getOrder(id: number) {
@@ -63,7 +66,7 @@ export default class OrderRepository extends BaseRepository {
     return { data: results.data, ...results.meta };
   }
 
-  async countOrders() {
+  async ordersStats() {
     const orders = await Database.rawQuery(
       "select status, count (id) from orders GROUP BY status;"
     );

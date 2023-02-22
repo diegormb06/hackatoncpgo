@@ -1,7 +1,8 @@
-import AddressRepository from "App/repository/AddressRepository";
+import AddressRepository from "App/Repositories/AddressRepository";
 
 export default class AddressService {
-  private readonly addressRepository: AddressRepository = new AddressRepository();
+  private readonly addressRepository: AddressRepository =
+    new AddressRepository();
 
   getAddress() {
     return this.addressRepository.getAll();

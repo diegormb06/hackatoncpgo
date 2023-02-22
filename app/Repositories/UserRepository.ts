@@ -1,8 +1,12 @@
 import User from "App/Models/User";
-import BaseRepository from "App/repository/BaseRepository";
+import BaseRepository from "App/Repositories/BaseRepository";
+import IUserRepository from "Contracts/interfaces/IUserRepository";
 import { UserType } from "Contracts/interfaces/userService";
 
-export default class UserRepository extends BaseRepository {
+export default class UserRepository
+  extends BaseRepository
+  implements IUserRepository
+{
   constructor() {
     super(User);
   }

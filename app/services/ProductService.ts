@@ -1,7 +1,8 @@
-import ProductRepository from "../repository/ProductRepository";
+import ProductRepository from "../Repositories/ProductRepository";
 
 export default class ProductService {
-  private readonly productRepository: ProductRepository = new ProductRepository();
+  private readonly productRepository: ProductRepository =
+    new ProductRepository();
 
   getProduct(page) {
     return this.productRepository.getAll(page);
@@ -12,7 +13,7 @@ export default class ProductService {
   }
 
   async createProduct(data: object) {
-    return  await this.productRepository.create(data);
+    return await this.productRepository.create(data);
   }
 
   updateProduct(id: number, data: object) {

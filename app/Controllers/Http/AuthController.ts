@@ -1,7 +1,7 @@
 import User from "App/Models/User";
 import Hash from "@ioc:Adonis/Core/Hash";
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
-import UserRepository from "App/repository/UserRepository";
+import UserRepository from "App/Repositories/UserRepository";
 
 export default class AuthController {
   public async login({ auth, request, response }: http) {

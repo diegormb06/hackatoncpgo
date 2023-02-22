@@ -1,7 +1,9 @@
-import UserRepository from "App/repository/UserRepository";
+import { IUserServices } from "Contracts/interfaces/IUserServices";
+// import UserRepository from "@ioc:Api/UserRepository";
+import IUserRepository from "Contracts/interfaces/IUserRepository";
 
-export default class UserService {
-  private userRepository: UserRepository = new UserRepository();
+export default class UserServices implements IUserServices {
+  constructor(private userRepository: IUserRepository) {}
 
   getUsers() {
     return this.userRepository.getAll();
@@ -15,11 +17,11 @@ export default class UserService {
     return await this.userRepository.create(data);
   }
 
-  updateUser(id: number, data: object) {
+  async updateUser(id: number, data: object) {
     return this.userRepository.update(id, data);
   }
 
-  deleteUser(id: number) {
+  async deleteUser(id: number) {
     return this.userRepository.delete(id);
   }
 
