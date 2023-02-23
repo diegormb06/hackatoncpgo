@@ -10,7 +10,8 @@ export default class CreateAddressesTable extends BaseSchema {
         .integer("user_id")
         .unsigned()
         .references("users.id")
-        .onDelete("CASCADE");
+        .onDelete("CASCADE")
+        .notNullable();
       table.string("address").notNullable();
       table.string("zipcode", 8).notNullable();
       table.string("number", 6);
@@ -19,7 +20,7 @@ export default class CreateAddressesTable extends BaseSchema {
       table.string("city", 50);
       table.string("state", 50).defaultTo("Goiás");
       table.string("country", 50).defaultTo("Brasil");
-      table.boolean("is_primary");
+      table.boolean("is_primary").defaultTo(false);
       table.timestamps();
     });
   }

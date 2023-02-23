@@ -1,6 +1,4 @@
-import IRepository from "Contracts/interfaces/repository";
-
-export default abstract class BaseRepository implements IRepository {
+export default abstract class BaseRepository {
   protected constructor(private model) {}
 
   async create(data: object) {
@@ -8,8 +6,8 @@ export default abstract class BaseRepository implements IRepository {
     return newData.serialize();
   }
 
-  async getAll() {
-    const results = (await this.model.query().paginate(1, 10)).serialize();
+  async getAll(page = 1) {
+    const results = (await this.model.query().paginate(page, 10)).serialize();
     return { data: results.data, ...results.meta };
   }
 
@@ -29,7 +27,7 @@ export default abstract class BaseRepository implements IRepository {
     let model = await this.model.findOrFail(id);
     try {
       model.delete();
-      return { message: "deleted with success" };
+      return true;
     } catch (e) {
       return e.message;
     }

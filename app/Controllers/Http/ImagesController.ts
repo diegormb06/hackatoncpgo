@@ -28,5 +28,7 @@ export default class ImagesController {
     );
   }
 
-  public async deleteImages() {}
+  public async deleteImages({params}:http) {
+    return imageService.deleteProductImage(params.image_id)
+  }
 }

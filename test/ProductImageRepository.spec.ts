@@ -1,5 +1,5 @@
 import test from "japa";
-import ProductImageRepository from "App/repository/ProductImageRepository";
+import ProductImageRepository from "App/Repositories/ProductImageRepository";
 const productImageRepository = new ProductImageRepository();
 
 const imageAttributes = [

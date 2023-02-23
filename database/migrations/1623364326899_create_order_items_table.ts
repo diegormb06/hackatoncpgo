@@ -13,14 +13,10 @@ export default class CreateOrderItemsTable extends BaseSchema {
       table.integer("quantity");
       table.integer("discount");
       table.float("total", 8, 2);
+      table.integer("order_id").unsigned().references("orders.id");
       table
-        .integer("order_id")
-        .unsigned()
-        .references("orders.id")
-        .onDelete("cascade");
-      table
-        .enum("status", ["awaiting", "received", "delivering", "complete"])
-        .defaultTo("awaiting");
+        .enum("status", ["new", "received", "delivering", "complete"])
+        .defaultTo("new");
       table.timestamps();
     });
   }

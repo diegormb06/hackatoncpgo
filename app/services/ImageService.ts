@@ -1,8 +1,7 @@
 import Application from "@ioc:Adonis/Core/Application";
-import UserRepository from "../repository/UserRepository";
-// import ImagesServiceInterface from "Contracts/interfaces/ImagesServiceInterface";
+import UserRepository from "../Repositories/UserRepository";
 import { MultipartFileContract } from "@ioc:Adonis/Core/BodyParser";
-import ProductImageRepository from "App/repository/ProductImageRepository";
+import ProductImageRepository from "App/Repositories/ProductImageRepository";
 import cuid from "cuid";
 import fs from "fs";
 
@@ -11,7 +10,7 @@ export default class ImageService {
     const newPhoto = `${cuid()}.${newImage.extname}`;
 
     const userRepository = new UserRepository();
-    const userPhoto = (await userRepository.findOne(user_id)).photo;
+    const userPhoto = (await userRepository.findOne(user_id))?.photo;
 
     if (userPhoto)
       fs.unlinkSync(Application.makePath("uploads/photos/" + userPhoto));
@@ -27,7 +26,7 @@ export default class ImageService {
 
   async deletePhoto(user_id: number) {
     const userRepository = new UserRepository();
-    const userPhoto = (await userRepository.findOne(user_id)).photo;
+    const userPhoto = (await userRepository.findOne(user_id))?.photo;
 
     if (userPhoto)
       fs.unlinkSync(Application.makePath("uploads/photos/" + userPhoto));
@@ -44,10 +43,12 @@ export default class ImageService {
         await image.move(Application.makePath("uploads/images"), {
           name: imageName,
         });
+
         await productImageRepository.create({
-          product_id: product_id,
+          product_id,
           path: imageName,
         });
+
         createdImages.push(imageName);
       }
 
@@ -55,5 +56,23 @@ export default class ImageService {
     } catch (e) {
       return e.message;
     }
+  }
+
+  async deleteProductImage(image_id: number) {
+    const imageRepository = new ProductImageRepository();
+    const productImage = await imageRepository.findOne(image_id);
+
+    fs.access(
+      Application.makePath("uploads/images/" + productImage.path),
+      (err: any) => {
+        if (!err)
+          fs.unlinkSync(
+            Application.makePath("uploads/images/" + productImage.path)
+          );
+      }
+    );
+
+    await imageRepository.delete(image_id);
+    return `imagem ${productImage.path} deletada`;
   }
 }

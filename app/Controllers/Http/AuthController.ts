@@ -1,22 +1,26 @@
 import User from "App/Models/User";
 import Hash from "@ioc:Adonis/Core/Hash";
+import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
+import UserRepository from "App/Repositories/UserRepository";
 
 export default class AuthController {
-  public async login({ auth, request, response }) {
+  public async login({ auth, request, response }: http) {
     const email = request.input("email");
     const password = request.input("password");
+    const userRepository = new UserRepository();
 
     try {
       const { token } = await auth.use("api").attempt(email, password);
-      const user = auth.user.serialize();
-      return { ...user, token };
-    } catch (error.message) {
+      const user = auth.user?.serialize();
+      const userData = await userRepository.findOne(user?.id);
+      return { ...userData, token };
+    } catch (error) {
       console.log(error);
       return response.badRequest(error.message);
     }
   }
 
-  public async adminLogin({ auth, request, response }) {
+  public async adminLogin({ auth, request, response }: http) {
     try {
       const email = request.input("email");
       const password = request.input("password");
@@ -28,15 +32,15 @@ export default class AuthController {
         .firstOrFail();
 
       if (!(await Hash.verify(user.password, password))) {
-        return response.badRequest("Invalid credentials");
+        return response.forbidden("Invalid credentials");
       }
 
       const { token } = await auth.use("api").attempt(email, password);
-      const userInfo = auth.user.serialize();
+      const userInfo = auth.user?.serialize();
 
       return { ...userInfo, token };
     } catch (error) {
-      return response.badRequest(error.message);
+      return response.status(401).json({ error: "Não Autorizado" });
     }
   }
 

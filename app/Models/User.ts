@@ -2,7 +2,6 @@ import {
   BaseModel,
   beforeSave,
   column,
-  computed,
   HasMany,
   hasMany,
   hasOne,
@@ -54,11 +53,6 @@ export default class User extends BaseModel {
     if (user.$dirty.password) {
       user.password = await Hash.make(user.password);
     }
-  }
-
-  @computed()
-  public get full_name() {
-    return `${this.firstName} ${this.lastName}`;
   }
 
   @hasOne(() => Shop)

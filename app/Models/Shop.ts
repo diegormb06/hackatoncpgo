@@ -9,6 +9,7 @@ import {
 } from "@ioc:Adonis/Lucid/Orm";
 import User from "App/Models/User";
 import Product from "App/Models/Product";
+import Order from "./Order";
 
 export default class Shop extends BaseModel {
   @column({ isPrimary: true })
@@ -45,7 +46,7 @@ export default class Shop extends BaseModel {
   public complement: string;
 
   @column()
-  public district: string;
+  public neighborhood: string;
 
   @column()
   public city: string;
@@ -59,6 +60,9 @@ export default class Shop extends BaseModel {
   @column()
   public status: string;
 
+  @column()
+  public payment_account: string;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 
@@ -70,4 +74,7 @@ export default class Shop extends BaseModel {
 
   @hasMany(() => Product)
   public products: HasMany<typeof Product>;
+
+  @hasMany(() => Order)
+  public orders: HasMany<typeof Order>;
 }

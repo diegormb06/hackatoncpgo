@@ -12,9 +12,13 @@ export default class CreateUserValidator {
     password: schema.string(),
     first_name: schema.string(),
     last_name: schema.string(),
-    cpf: schema.string(),
+    cpf: schema.string({}, [rules.unique({ table: "users", column: "cpf" })]),
     phone: schema.string(),
   });
 
-  public messages = {};
+  public messages = {
+    "email.unique": "O email informado já está sendo usado",
+    "cpf.unique": "O cpf informado já está sendo usado",
+    required: "O campo {{ field }} é obrigatório",
+  };
 }

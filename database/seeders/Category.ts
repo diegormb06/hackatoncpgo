@@ -26,6 +26,21 @@ export default class CategorySeeder extends BaseSeeder {
         slug: "oleos-e-lubrificantes",
         description: "Óleos e lubrificantes",
       },
+      {
+        name: "Câmbio e transmissão",
+        slug: "cambio-e-transmissao",
+        description: "Câmbio e transmissão",
+      },
+      {
+        name: "Freios",
+        slug: "freios",
+        description: "Freios",
+      },
+      {
+        name: "Suspensão",
+        slug: "suspensao",
+        description: "Suspensão",
+      },
     ]);
   }
 }

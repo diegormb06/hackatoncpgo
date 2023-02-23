@@ -11,7 +11,6 @@ export const UserFactory = Factory.define(User, async ({ faker }) => {
     role: faker.random.arrayElement(["user", "admin", "store"]),
     cpf: faker.phone.phoneNumber("###.###.###-##"),
     phone: faker.phone.phoneNumber("(62)####-####"),
-    photo: faker.image.avatar(),
   };
 })
   .state("role", (user) => (user.role = "admin"))

@@ -1,32 +1,50 @@
-import OrderRepository from "../repository/OrderRepository";
 import WebSocket from "App/services/WebSocket";
+import { OrderStatus } from "App/domain/enums/OrderStatus";
+import { IOrderServices } from "Contracts/interfaces/IOrderServices";
+import { IOrderRepository } from "Contracts/interfaces/IOrderRepository";
+import OrderRepository from "App/Repositories/OrderRepository";
 
-export default class OrderService {
-  private readonly orderRepository: OrderRepository = new OrderRepository();
+export default class OrderService implements IOrderServices {
+  constructor(
+    private readonly orderRepository: IOrderRepository = new OrderRepository()
+  ) {}
 
-  getOrder() {
-    return this.orderRepository.getAll();
+  async getAllOrders(page) {
+    return await this.orderRepository.getAll(page);
   }
 
-  showOrder(id: number) {
+  async getOrderStats() {
+    return await this.orderRepository.ordersStats();
+  }
+
+  async findOrder(id: number) {
     return this.orderRepository.getOrder(id);
   }
 
   async createOrder(orderData: any) {
     const newOrder = await this.orderRepository.createOrder(orderData);
+
+    if (!newOrder) throw new Error("Error creating order");
+
     WebSocket.io.emit("new:order", newOrder);
     return newOrder;
   }
 
-  updateOrder(id: number, data: object) {
+  async updateOrder(id: number, data: object) {
     return this.orderRepository.update(id, data);
   }
 
-  deleteOrder(id: number) {
+  async updateOrderStatus(id: number, status: OrderStatus) {
+    await this.orderRepository.update(id, { status });
+    WebSocket.io.emit(`update:order-${id}`, status);
+    return true;
+  }
+
+  async deleteOrder(id: number) {
     return this.orderRepository.delete(id);
   }
 
-  getOrdersByShop(shopId: number) {
+  async getOrdersByShop(shopId: number) {
     return this.orderRepository.getOrdersByShop(shopId);
   }
 }
