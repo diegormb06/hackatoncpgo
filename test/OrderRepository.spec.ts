@@ -41,7 +41,7 @@ test.group("Test OrderRepository", () => {
       ],
       "order data should contains all required attributes"
     );
-    assert.isArray(orders.data, "data should be an array");
+    assert.isArray(orders, "data should be an array");
   });
 
   test("orderRepository.findOne should return one order data", async (assert) => {

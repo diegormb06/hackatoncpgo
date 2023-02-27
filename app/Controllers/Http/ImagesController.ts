@@ -1,5 +1,5 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
-import imageService from "@ioc:Services/ImageServices";
+import imageService from "@ioc:Api/ImageServices";
 import Application from "@ioc:Adonis/Core/Application";
 
 export default class ImagesController {
@@ -28,7 +28,7 @@ export default class ImagesController {
     );
   }
 
-  public async deleteImages({params}:http) {
-    return imageService.deleteProductImage(params.image_id)
+  public async deleteImages({ params }: http) {
+    return imageService.deleteProductImage(params.image_id);
   }
 }

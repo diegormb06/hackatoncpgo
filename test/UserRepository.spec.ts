@@ -72,7 +72,7 @@ test.group("Test UserRepository", (group) => {
     const foundUser = await userRepository.findOne(testUser.id);
 
     assert.isOk(foundUser, "findOne should return an truthy value");
-    assert.equal(testUser.id, foundUser.id, "found user is equal to testUser");
+    assert.equal(testUser.id, foundUser?.id, "found user is equal to testUser");
   });
 
   test("userRepository.update should update an user data", async (assert) => {

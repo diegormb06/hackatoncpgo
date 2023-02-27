@@ -11,10 +11,8 @@ export default class AppProvider {
 
     const UserRepository = (await import("App/Repositories/UserRepository"))
       .default;
-    
     const OrderRepository = (await import("App/Repositories/OrderRepository"))
       .default;
-    
     const ShopRepository = (await import("App/Repositories/ShopRepository"))
       .default;
 
