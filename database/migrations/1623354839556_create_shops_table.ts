@@ -6,7 +6,7 @@ export default class CreateShopsTable extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments("id").primary();
-      table.string("payment_account").unique().notNullable();
+      table.string("payment_account").unique().nullable();
       table.integer("user_id").references("users.id");
       table.string("name").unique();
       table.string("phone", 14);

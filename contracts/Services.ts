@@ -23,7 +23,7 @@ declare module "@ioc:Api/ShopServices" {
 }
 
 declare module "@ioc:Api/ShopRepository" {
-  import IShopRepository from "Contracts/interfaces/IShopRepository";
+  import { IShopRepository } from "Contracts/interfaces/IShopRepository";
   const ShopRepository: IShopRepository;
   export default ShopRepository;
 }

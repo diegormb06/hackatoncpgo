@@ -27,4 +27,14 @@ export default class PaymentController {
       `[${loggerTag}] - Dados do Pagamento ${JSON.stringify(paymentData)}`
     );
   }
+
+  public async createIntegrationLink({ params }: http) {
+    const { accountId } = params;
+
+    const link = await this.paymentServices.createStripeIntegrationLink(
+      accountId
+    );
+
+    return link;
+  }
 }

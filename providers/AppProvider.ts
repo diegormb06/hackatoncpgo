@@ -4,8 +4,8 @@ export default class AppProvider {
   constructor(protected app: ApplicationContract) {}
 
   public async register() {
-    const imageService = (await import("App/services/ImageService")).default;
-    const OrderService = (await import("App/services/OrderService")).default;
+    const { ImageService } = await import("App/services/ImageService");
+    const { OrderService } = await import("App/services/OrderService");
     const UserServices = (await import("App/services/UserServices")).default;
     const ShopServices = (await import("App/services/ShopServices")).default;
 
@@ -13,13 +13,12 @@ export default class AppProvider {
       .default;
     const OrderRepository = (await import("App/Repositories/OrderRepository"))
       .default;
-    const ShopRepository = (await import("App/Repositories/ShopRepository"))
-      .default;
+    const { ShopRepository } = await import("App/Repositories/ShopRepository");
 
     this.app.container.bind("Api/ShopRepository", () => new ShopRepository());
     this.app.container.bind("Api/UserRepository", () => new UserRepository());
     this.app.container.bind("Api/OrderRepository", () => new OrderRepository());
-    this.app.container.bind("Api/ImageServices", () => new imageService());
+    this.app.container.bind("Api/ImageServices", () => new ImageService());
     this.app.container.bind("Api/OrderServices", () => new OrderService());
     this.app.container.bind("Api/ShopServices", () => new ShopServices());
 

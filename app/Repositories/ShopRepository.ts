@@ -1,11 +1,8 @@
 import Shop from "App/Models/Shop";
 import BaseRepository from "App/Repositories/BaseRepository";
-import IShopRepository from "Contracts/interfaces/IShopRepository";
+import { IShopRepository } from "Contracts/interfaces/IShopRepository";
 
-export default class ShopRepository
-  extends BaseRepository
-  implements IShopRepository
-{
+export class ShopRepository extends BaseRepository implements IShopRepository {
   constructor() {
     super(Shop);
   }

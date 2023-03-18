@@ -1,5 +1,5 @@
 import test from "japa";
-import ShopRepository from "App/Repositories/ShopRepository";
+import { ShopRepository } from "App/Repositories/ShopRepository";
 import { ShopFactory } from "Database/factories/shopFactory";
 const shopRepository = new ShopRepository();
 

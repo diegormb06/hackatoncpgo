@@ -82,18 +82,11 @@ export class PaymentService {
         },
       });
 
-      const accountLink = await stripe.accountLinks.create({
-        account: account.id,
-        refresh_url: "https://api.autofastapp.com/reauth",
-        return_url: "https://api.autofastapp.com/return",
-        type: "account_onboarding",
-      });
-
       Logger.info(
         `[${loggerTag}] Loja id ${account.id} criada no stripe com sucesso`
       );
 
-      return { account, accountLink };
+      return { account };
     } catch (error) {
       Logger.error(
         `[${loggerTag}] Erro ao criar loja ${shopData.name} no Stripe`
@@ -102,7 +95,22 @@ export class PaymentService {
     }
   }
 
-  removePaymentAccount(accountId: string) {
+  public async createStripeIntegrationLink(accountId: string) {
+    const accountLink = await stripe.accountLinks.create({
+      account: accountId,
+      refresh_url: "https://api.autofastapp.com/reauth",
+      return_url: "https://api.autofastapp.com/return",
+      type: "account_onboarding",
+    });
+
+    Logger.info(
+      `[${loggerTag}] Link para o código ${accountId} criado com sucesso`
+    );
+
+    return { accountLink };
+  }
+
+  public async removePaymentAccount(accountId: string) {
     return stripe.accounts.del(accountId);
   }
 }

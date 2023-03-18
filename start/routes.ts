@@ -20,43 +20,43 @@
 
 import Route from "@ioc:Adonis/Core/Route";
 
-Route.get("/api", () => "O bambu ta gemeeeendo 1.0");
+Route.get("/api", () => "Autofast API 1.0.0");
 
 Route.group(() => {
   Route.post("/login", "AuthController.login");
   Route.post("/admin", "AuthController.adminLogin");
   Route.post("/authenticate", "AuthController.authenticate");
-}).prefix("/api/auth");
+}).prefix("/auth");
 
 Route.group(() => {
   Route.resource("products", "ProductsController").apiOnly();
-  Route.get("/searchProducts", "ProductsController.searchProduct");
+  Route.get("products/search", "ProductsController.searchProduct");
+
   Route.post("registerUser", "UsersController.store");
   Route.get("uploads/:type/:filename", "ImagesController.show");
-
-  Route.post("payment-status", "PaymentController.savePaymentData");
-}).prefix("/api");
+});
 
 Route.group(() => {
   Route.resource("users", "UsersController").apiOnly();
   Route.resource("address", "AddressesController").apiOnly();
+
   Route.resource("shops", "ShopsController").apiOnly();
   Route.get("shops/:shopId/products", "ShopsController.getProductsByShop");
   Route.get("shops/:shopId/orders", "OrdersController.getOrdersByShop");
 
   Route.resource("orders", "OrdersController").apiOnly();
-  Route.get("/order-stats", "OrdersController.orderStats");
-
-  Route.put(
-    "/orders/update-status/:orderId/:status",
-    "OrdersController.updateStatus"
-  );
+  Route.get("orders/stats", "OrdersController.orderStats");
+  Route.put("orders/:orderId/:status", "OrdersController.updateStatus");
 
   Route.post("uploads/photo/:user_id", "ImagesController.uploadPhoto");
   Route.delete("uploads/photo/:user_id", "ImagesController.deletePhoto");
   Route.post("uploads/images/:product_id", "ImagesController.uploadImages");
   Route.delete("uploads/images/:image_id", "ImagesController.deleteImages");
+
   Route.post("payment", "PaymentController.createPaymentIntent");
-})
-  .prefix("/api")
-  .middleware("auth");
+  Route.post("payment/status", "PaymentController.savePaymentData");
+  Route.get(
+    "payment/link/:accountId",
+    "PaymentController.createIntegrationLink"
+  );
+}).middleware("auth");

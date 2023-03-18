@@ -1,4 +1,4 @@
-export default interface IShopRepository {
+export interface IShopRepository {
   getAll(page: number): Promise<any>;
   findOne(shopId: number): Promise<any>;
   create(data: object): Promise<any>;

@@ -4,7 +4,9 @@ import CreateShopValidator from "App/Validators/CreateShopValidator";
 import { IShopServices } from "Contracts/interfaces/IShopServices";
 
 export default class ShopsController {
-  constructor(private readonly shopServices: IShopServices = ShopServices) {}
+  constructor(
+    private readonly shopServices: IShopServices = ShopServices,
+  ) {}
 
   async index({ params }: http) {
     const { page } = params;
