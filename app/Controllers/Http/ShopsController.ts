@@ -43,4 +43,14 @@ export default class ShopsController {
     const page = request.input("page", 1);
     return this.shopServices.getOrdersByShop(shopId, page);
   }
+
+  async createPaymentAccount({ params }: http) {
+    const { shopId } = params;
+    return this.shopServices.createPaymentAccount(shopId);
+  }
+
+  async confirmIntegration({ params }: http) {
+    const { paymentAccount } = params;
+    return this.shopServices.confirmIntegration(paymentAccount);
+  }
 }

@@ -7,4 +7,5 @@ export interface IShopRepository {
   search(qs: Record<string, any>): Promise<any>;
   getProductsByShop(shopId: number, page: number): Promise<any>;
   getOrdersByShop(shopId: number, page: number): Promise<any>;
+  confirmPaymentIntegration(accountId: string): Promise<any>;
 }

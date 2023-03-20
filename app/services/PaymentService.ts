@@ -89,7 +89,7 @@ export class PaymentService {
       return { account };
     } catch (error) {
       Logger.error(
-        `[${loggerTag}] Erro ao criar loja ${shopData.name} no Stripe`
+        `[${loggerTag}] Erro ao criar loja ${shopData.name} no Stripe ${error}`
       );
       return null;
     }
@@ -99,7 +99,7 @@ export class PaymentService {
     const accountLink = await stripe.accountLinks.create({
       account: accountId,
       refresh_url: "https://api.autofastapp.com/reauth",
-      return_url: "https://api.autofastapp.com/return",
+      return_url: `https://api.autofastapp.com/shops/confirm-integration/${accountId}`,
       type: "account_onboarding",
     });
 

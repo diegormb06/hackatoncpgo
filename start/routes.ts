@@ -43,6 +43,14 @@ Route.group(() => {
   Route.resource("shops", "ShopsController").apiOnly();
   Route.get("shops/:shopId/products", "ShopsController.getProductsByShop");
   Route.get("shops/:shopId/orders", "OrdersController.getOrdersByShop");
+  Route.get(
+    "shops/confirm-integration/:paymentAccount",
+    "ShopsController.confirmIntegration"
+  );
+  Route.get(
+    "shops/:shopId/addPaymentAccount",
+    "OrdersController.createPaymentAccount"
+  );
 
   Route.resource("orders", "OrdersController").apiOnly();
   Route.get("orders/stats", "OrdersController.orderStats");

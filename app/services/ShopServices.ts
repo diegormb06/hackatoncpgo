@@ -24,7 +24,7 @@ export default class ShopServices implements IShopServices {
       const paymentGatewayAccount =
         await this.paymentGatewayService.createShopAccount(data);
 
-      if (!paymentGatewayAccount?.account) {
+      if (!paymentGatewayAccount?.account?.id) {
         throw new Error("Payment gateway account not created");
       }
 
@@ -37,6 +37,32 @@ export default class ShopServices implements IShopServices {
     }
 
     return newShop;
+  }
+
+  async createPaymentAccount(shopId: number) {
+    const shop = await this.shopRepository.findOne(shopId);
+
+    if (!shop) {
+      throw new Error("Shop not found");
+    }
+
+    if (shop.payment_account) {
+      throw new Error("Payment account already created");
+    }
+
+    const paymentGatewayAccount =
+      await this.paymentGatewayService.createShopAccount(shop);
+
+    if (!paymentGatewayAccount?.account?.id) {
+      throw new Error("Payment gateway account not created");
+    }
+
+    const newShopData = {
+      ...shop,
+      payment_account: paymentGatewayAccount.account.id,
+    };
+
+    return this.updateShop(shopId, newShopData);
   }
 
   updateShop(id: number, data: object) {
@@ -61,5 +87,13 @@ export default class ShopServices implements IShopServices {
 
   async getProductsByShop(shopId, page) {
     return this.shopRepository.getProductsByShop(shopId, page);
+  }
+
+  async confirmIntegration(paymentAccount) {
+    const shop = await this.shopRepository.confirmPaymentIntegration(
+      paymentAccount
+    );
+
+    return shop;
   }
 }

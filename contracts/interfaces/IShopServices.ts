@@ -2,6 +2,7 @@ import { ModelPaginatorContract } from "@ioc:Adonis/Lucid/Orm";
 import Shop from "App/Models/Shop";
 
 export interface IShopServices {
+  createPaymentAccount(shopId: number): Promise<Shop>;
   getShops(page: number): Promise<ModelPaginatorContract<Shop>>;
   findShop(id: number): Promise<any>;
   createShop(data: object): Promise<any>;
@@ -11,4 +12,5 @@ export interface IShopServices {
   registerConfirmation(id: number, data: object): Promise<any>;
   getOrdersByShop(shopId: number, page: number): Promise<any>;
   getProductsByShop(shopId: number, page: number): Promise<any>;
+  confirmIntegration(accountId: string): Promise<any>;
 }

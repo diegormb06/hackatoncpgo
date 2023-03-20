@@ -1,3 +1,4 @@
+import { ShopStatus } from "App/domain/enums/ShopStatus";
 import Shop from "App/Models/Shop";
 import BaseRepository from "App/Repositories/BaseRepository";
 import { IShopRepository } from "Contracts/interfaces/IShopRepository";
@@ -29,5 +30,13 @@ export class ShopRepository extends BaseRepository implements IShopRepository {
   async getOrdersByShop(shopId, page) {
     const shop = await Shop.findOrFail(shopId);
     return shop.related("orders").query().paginate(page, 10);
+  }
+
+  async confirmPaymentIntegration(accountId: string) {
+    const shop = await Shop.findByOrFail("payment_account", accountId);
+    shop.status = ShopStatus.ACTIVE;
+    await shop.save();
+
+    return shop;
   }
 }
