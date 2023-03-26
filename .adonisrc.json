@@ -1,7 +1,7 @@
 {
   "typescript": true,
   "commands": [
-    "./commands",
+    "./infrastructure/framework/commands",
     "@adonisjs/core/build/commands",
     "@adonisjs/repl/build/commands",
     "@adonisjs/lucid/build/commands"
@@ -9,7 +9,7 @@
   "directories": {
     "config": "config",
     "public": "public",
-    "contracts": "contracts",
+    "contracts": "infrastructure/framework/contracts",
     "providers": "providers",
     "database": "infrastructure/database",
     "migrations": "infrastructure/database/migrations",
@@ -38,7 +38,7 @@
   },
   "preloads": ["./start/routes", "./start/kernel"],
   "providers": [
-    "./providers/AppProvider",
+    "./infrastructure/framework/providers/AppProvider",
     "@adonisjs/core",
     "@adonisjs/lucid",
     "@adonisjs/auth"
