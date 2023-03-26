@@ -7,10 +7,10 @@
     "@adonisjs/lucid/build/commands"
   ],
   "directories": {
-    "config": "config",
+    "config": "infrastructure/framework/config",
     "public": "public",
     "contracts": "infrastructure/framework/contracts",
-    "providers": "providers",
+    "providers": "infrastructure/framework/providers",
     "database": "infrastructure/database",
     "migrations": "infrastructure/database/migrations",
     "seeds": "infrastructure/database/seeders",
