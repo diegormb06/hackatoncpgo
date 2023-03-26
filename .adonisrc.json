@@ -6,6 +6,29 @@
     "@adonisjs/repl/build/commands",
     "@adonisjs/lucid/build/commands"
   ],
+  "directories": {
+    "config": "config",
+    "public": "public",
+    "contracts": "contracts",
+    "providers": "providers",
+    "database": "infrastructure/database",
+    "migrations": "infrastructure/database/migrations",
+    "seeds": "infrastructure/database/seeders",
+    "resources": "resources",
+    "views": "resources/views",
+    "start": "start",
+    "tmp": "tmp",
+    "tests": "tests"
+  },
+  "namespaces": {
+    "models": "App/Models",
+    "middleware": "App/Middleware",
+    "exceptions": "App/Exceptions",
+    "validators": "App/Validators",
+    "httpControllers": "App/Controllers",
+    "eventListeners": "App/Listeners",
+    "redisListeners": "App/Listeners"
+  },
   "exceptionHandlerNamespace": "App/Exceptions/Handler",
   "aliases": {
     "App": "app",
@@ -13,17 +36,12 @@
     "Database": "database",
     "Contracts": "contracts"
   },
-  "preloads": [
-    "./start/routes",
-    "./start/kernel"
-  ],
+  "preloads": ["./start/routes", "./start/kernel"],
   "providers": [
     "./providers/AppProvider",
     "@adonisjs/core",
     "@adonisjs/lucid",
     "@adonisjs/auth"
   ],
-  "aceProviders": [
-    "@adonisjs/repl"
-  ]
+  "aceProviders": ["@adonisjs/repl"]
 }
