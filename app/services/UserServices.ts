@@ -1,6 +1,6 @@
-import { IUserServices } from "Contracts/interfaces/IUserServices";
+import { IUserServices } from "Domain/interfaces/IUserServices";
 // import UserRepository from "@ioc:Api/UserRepository";
-import IUserRepository from "Contracts/interfaces/IUserRepository";
+import IUserRepository from "Domain/interfaces/IUserRepository";
 
 export default class UserServices implements IUserServices {
   constructor(private userRepository: IUserRepository) {}

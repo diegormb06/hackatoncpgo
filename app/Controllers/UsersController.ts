@@ -1,7 +1,7 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
 import UserServices from "@ioc:Api/UserServices";
 import CreateUserValidator from "App/Validators/CreateUserValidator";
-import { IUserServices } from "Contracts/interfaces/IUserServices";
+import { IUserServices } from "Domain/interfaces/IUserServices";
 import AuthController from "./AuthController";
 
 export default class UsersController {

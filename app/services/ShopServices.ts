@@ -1,6 +1,6 @@
 import { ShopRepository } from "Infrastructure/Repositories/ShopRepository";
-import { IShopRepository } from "Contracts/interfaces/IShopRepository";
-import { IShopServices } from "Contracts/interfaces/IShopServices";
+import { IShopRepository } from "Domain/interfaces/IShopRepository";
+import { IShopServices } from "Domain/interfaces/IShopServices";
 import { PaymentService } from "./PaymentService";
 
 export default class ShopServices implements IShopServices {

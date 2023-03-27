@@ -1,6 +1,6 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
 import OrderServices from "@ioc:Api/OrderServices";
-import { IOrderServices } from "Contracts/interfaces/IOrderServices";
+import { IOrderServices } from "Domain/interfaces/IOrderServices";
 
 export default class OrdersController {
   constructor(private readonly orderService: IOrderServices = OrderServices) {}

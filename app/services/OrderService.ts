@@ -1,7 +1,7 @@
 import WebSocket from "App/services/WebSocket";
 import { OrderStatus } from "domain/enums/OrderStatus";
-import { IOrderServices } from "Contracts/interfaces/IOrderServices";
-import { IOrderRepository } from "Contracts/interfaces/IOrderRepository";
+import { IOrderServices } from "Domain/interfaces/IOrderServices";
+import { IOrderRepository } from "Domain/interfaces/IOrderRepository";
 import OrderRepository from "Infrastructure/Repositories/OrderRepository";
 
 export class OrderService implements IOrderServices {
