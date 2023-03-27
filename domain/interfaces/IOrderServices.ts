@@ -1,5 +1,5 @@
-import { OrderStatus } from "App/domain/enums/OrderStatus";
-import Order from "App/Models/Order";
+import { OrderStatus } from "domain/enums/OrderStatus";
+import Order from "Infrastructure/database/Models/Order";
 import { OrderStatsResponse } from "App/Types/OrderStatsResponse";
 
 export interface IOrderServices {

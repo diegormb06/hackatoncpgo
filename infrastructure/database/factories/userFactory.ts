@@ -1,4 +1,4 @@
-import User from "App/Models/User";
+import User from "Infrastructure/database/Models/User";
 import Factory from "@ioc:Adonis/Lucid/Factory";
 import Hash from "@ioc:Adonis/Core/Hash";
 

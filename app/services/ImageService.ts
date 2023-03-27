@@ -1,7 +1,7 @@
 import Application from "@ioc:Adonis/Core/Application";
-import UserRepository from "../Repositories/UserRepository";
+import UserRepository from "../../infrastructure/Repositories/UserRepository";
 import { MultipartFileContract } from "@ioc:Adonis/Core/BodyParser";
-import ProductImageRepository from "App/Repositories/ProductImageRepository";
+import ProductImageRepository from "Infrastructure/Repositories/ProductImageRepository";
 import cuid from "cuid";
 import fs from "fs";
 

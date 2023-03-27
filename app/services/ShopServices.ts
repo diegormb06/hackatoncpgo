@@ -1,4 +1,4 @@
-import { ShopRepository } from "App/Repositories/ShopRepository";
+import { ShopRepository } from "Infrastructure/Repositories/ShopRepository";
 import { IShopRepository } from "Contracts/interfaces/IShopRepository";
 import { IShopServices } from "Contracts/interfaces/IShopServices";
 import { PaymentService } from "./PaymentService";

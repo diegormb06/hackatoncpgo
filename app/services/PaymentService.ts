@@ -1,4 +1,4 @@
-import { PaymentRequest } from "App/domain/entities/PaymentRequest";
+import { PaymentRequest } from "domain/entities/PaymentRequest";
 import Env from "@ioc:Adonis/Core/Env";
 const stripe = require("stripe")(Env.get("STRIPE_KEY"));
 import Logger from "@ioc:Adonis/Core/Logger";

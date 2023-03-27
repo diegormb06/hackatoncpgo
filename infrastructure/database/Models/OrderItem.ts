@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { BaseModel, BelongsTo, belongsTo, column } from "@ioc:Adonis/Lucid/Orm";
-import Order from "App/Models/Order";
+import Order from "Infrastructure/database/Models/Order";
 
 export default class OrderItem extends BaseModel {
   @column({ isPrimary: true })

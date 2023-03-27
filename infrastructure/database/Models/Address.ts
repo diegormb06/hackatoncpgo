@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { BaseModel, BelongsTo, belongsTo, column } from "@ioc:Adonis/Lucid/Orm";
-import User from "App/Models/User";
+import User from "Infrastructure/database/Models/User";
 
 export default class Address extends BaseModel {
   @column({ isPrimary: true })

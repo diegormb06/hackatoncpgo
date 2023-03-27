@@ -1,5 +1,5 @@
 import Factory from "@ioc:Adonis/Lucid/Factory";
-import Address from "App/Models/Address";
+import Address from "Infrastructure/database/Models/Address";
 import { UserFactory } from "Database/factories/userFactory";
 
 export const AddressFactory = Factory.define(Address, async ({ faker }) => {

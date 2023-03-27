@@ -3,38 +3,14 @@ import { ApplicationContract } from "@ioc:Adonis/Core/Application";
 export default class AppProvider {
   constructor(protected app: ApplicationContract) {}
 
-  public async register() {
-    const { ImageService } = await import("App/services/ImageService");
-    const { OrderService } = await import("App/services/OrderService");
-    const UserServices = (await import("App/services/UserServices")).default;
-    const ShopServices = (await import("App/services/ShopServices")).default;
-
-    const UserRepository = (await import("App/Repositories/UserRepository"))
-      .default;
-    const OrderRepository = (await import("App/Repositories/OrderRepository"))
-      .default;
-    const { ShopRepository } = await import("App/Repositories/ShopRepository");
-
-    this.app.container.bind("Api/ShopRepository", () => new ShopRepository());
-    this.app.container.bind("Api/UserRepository", () => new UserRepository());
-    this.app.container.bind("Api/OrderRepository", () => new OrderRepository());
-    this.app.container.bind("Api/ImageServices", () => new ImageService());
-    this.app.container.bind("Api/OrderServices", () => new OrderService());
-    this.app.container.bind("Api/ShopServices", () => new ShopServices());
-
-    this.app.container.bind(
-      "Api/UserServices",
-      () => new UserServices(new UserRepository())
-    );
-
-    this.app.container.call;
-  }
+  public async register() {}
 
   public async boot() {
     // IoC container is ready
   }
 
   public async ready() {
+    console.log("App Environment", this.app.environment);
     if (this.app.environment === "web") {
       await import("../../../start/socket");
     }

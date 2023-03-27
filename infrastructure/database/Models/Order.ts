@@ -7,11 +7,11 @@ import {
   column,
   hasMany,
 } from "@ioc:Adonis/Lucid/Orm";
-import OrderItem from "App/Models/OrderItem";
-import User from "App/Models/User";
+import OrderItem from "Infrastructure/database/Models/OrderItem";
+import User from "Infrastructure/database/Models/User";
 
 import Shop from "./Shop";
-import { OrderStatus } from "App/domain/enums/OrderStatus";
+import { OrderStatus } from "Domain/enums/OrderStatus";
 
 export default class Order extends BaseModel {
   @column({ isPrimary: true })

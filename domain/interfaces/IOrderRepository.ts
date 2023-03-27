@@ -1,6 +1,6 @@
 import { ModelPaginatorContract } from "@ioc:Adonis/Lucid/Orm";
-import { OrderStatus } from "App/domain/enums/OrderStatus";
-import Order from "App/Models/Order";
+import { OrderStatus } from "domain/enums/OrderStatus";
+import Order from "Infrastructure/database/Models/Order";
 
 export interface IOrderRepository {
   delete(id: number): Promise<boolean>;

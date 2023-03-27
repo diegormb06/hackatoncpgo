@@ -1,6 +1,6 @@
-import User from "App/Models/User";
-import BaseRepository from "App/Repositories/BaseRepository";
-import IUserRepository from "Contracts/interfaces/IUserRepository";
+import BaseRepository from "Infrastructure/Repositories/BaseRepository";
+import User from "Infrastructure/database/Models/User";
+import IUserRepository from "Domain/interfaces/IUserRepository";
 
 export default class UserRepository
   extends BaseRepository

@@ -1,5 +1,5 @@
 import test from "japa";
-import AddressRepository from "App/Repositories/AddressRepository";
+import AddressRepository from "Infrastructure/Repositories/AddressRepository";
 import { AddressFactory } from "Database/factories/addressFactory";
 const addressRepository = new AddressRepository();
 

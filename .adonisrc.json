@@ -10,7 +10,7 @@
     "config": "infrastructure/framework/config",
     "public": "public",
     "contracts": "infrastructure/framework/contracts",
-    "providers": "infrastructure/framework/providers",
+    "providers": "providers",
     "database": "infrastructure/database",
     "migrations": "infrastructure/database/migrations",
     "seeds": "infrastructure/database/seeders",
@@ -21,7 +21,7 @@
     "tests": "tests"
   },
   "namespaces": {
-    "models": "App/Models",
+    "models": "Infrastructure/Database/Models",
     "middleware": "App/Middleware",
     "exceptions": "App/Exceptions",
     "validators": "App/Validators",
@@ -34,7 +34,9 @@
     "App": "app",
     "Config": "config",
     "Database": "database",
-    "Contracts": "contracts"
+    "Contracts": "contracts",
+    "Infrastructure": "infrastructure",
+    "Domain": "domain"
   },
   "preloads": ["./start/routes", "./start/kernel"],
   "providers": [

@@ -1,7 +1,7 @@
-import { ShopStatus } from "App/domain/enums/ShopStatus";
-import Shop from "App/Models/Shop";
-import BaseRepository from "App/Repositories/BaseRepository";
-import { IShopRepository } from "Contracts/interfaces/IShopRepository";
+import { ShopStatus } from "Domain/enums/ShopStatus";
+import Shop from "Infrastructure/database/Models/Shop";
+import { IShopRepository } from "Domain/interfaces/IShopRepository";
+import BaseRepository from "Infrastructure/Repositories/BaseRepository";
 
 export class ShopRepository extends BaseRepository implements IShopRepository {
   constructor() {

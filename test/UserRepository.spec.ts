@@ -1,8 +1,8 @@
 import test from "japa";
-import UserRepository from "App/Repositories/UserRepository";
+import UserRepository from "Infrastructure/Repositories/UserRepository";
 import { UserFactory } from "Database/factories/userFactory";
 import Database from "@ioc:Adonis/Lucid/Database";
-import User from "App/Models/User";
+import User from "Infrastructure/database/Models/User";
 const userRepository = new UserRepository();
 
 const userAttributes = [

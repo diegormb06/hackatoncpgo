@@ -1,5 +1,5 @@
-import BaseRepository from "App/Repositories/BaseRepository";
-import Product from "App/Models/Product";
+import BaseRepository from "Infrastructure/Repositories/BaseRepository";
+import Product from "Infrastructure/database/Models/Product";
 
 export default class UserRepository extends BaseRepository {
   constructor() {

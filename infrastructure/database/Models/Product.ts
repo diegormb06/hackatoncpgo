@@ -7,9 +7,9 @@ import {
   HasMany,
   hasMany,
 } from "@ioc:Adonis/Lucid/Orm";
-import Shop from "App/Models/Shop";
-import Category from "App/Models/Category";
-import ProductImage from "App/Models/ProductImage";
+import Shop from "Infrastructure/database/Models/Shop";
+import Category from "Infrastructure/database/Models/Category";
+import ProductImage from "Infrastructure/database/Models/ProductImage";
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })

@@ -1,5 +1,5 @@
 import { ModelPaginatorContract } from "@ioc:Adonis/Lucid/Orm";
-import Shop from "App/Models/Shop";
+import Shop from "Infrastructure/database/Models/Shop";
 
 export interface IShopServices {
   createPaymentAccount(shopId: number): Promise<Shop>;

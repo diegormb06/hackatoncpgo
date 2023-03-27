@@ -1,7 +1,7 @@
 import test from "japa";
-import ProductRepository from "App/Repositories/ProductRepository";
+import ProductRepository from "Infrastructure/Repositories/ProductRepository";
 import { ProductFactory } from "Database/factories/productFactory";
-import Product from "App/Models/Product";
+import Product from "Infrastructure/database/Models/Product";
 const productRepository = new ProductRepository();
 
 const productAttributes = [

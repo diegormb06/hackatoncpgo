@@ -1,4 +1,4 @@
-import ProductRepository from "../Repositories/ProductRepository";
+import ProductRepository from "../../infrastructure/Repositories/ProductRepository";
 
 export default class ProductService {
   private readonly productRepository: ProductRepository =

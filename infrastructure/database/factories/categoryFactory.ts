@@ -1,5 +1,5 @@
 import Factory from "@ioc:Adonis/Lucid/Factory";
-import Category from "App/Models/Category";
+import Category from "Infrastructure/database/Models/Category";
 
 export const CategoryFactory = Factory.define(Category, ({ faker }) => {
   return {

@@ -1,5 +1,5 @@
-import Order from "App/Models/Order";
-import { OrderStatus } from "App/domain/enums/OrderStatus";
+import Order from "Infrastructure/database/Models/Order";
+import { OrderStatus } from "domain/enums/OrderStatus";
 import Database from "@ioc:Adonis/Lucid/Database";
 import { IOrderRepository } from "Contracts/interfaces/IOrderRepository";
 import BaseRepository from "./BaseRepository";

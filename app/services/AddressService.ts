@@ -1,4 +1,4 @@
-import AddressRepository from "App/Repositories/AddressRepository";
+import AddressRepository from "Infrastructure/Repositories/AddressRepository";
 
 export default class AddressService {
   private readonly addressRepository: AddressRepository =

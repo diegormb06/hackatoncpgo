@@ -7,8 +7,8 @@ import {
   HasMany,
   hasMany,
 } from "@ioc:Adonis/Lucid/Orm";
-import User from "App/Models/User";
-import Product from "App/Models/Product";
+import User from "Infrastructure/database/Models/User";
+import Product from "Infrastructure/database/Models/Product";
 import Order from "./Order";
 
 export default class Shop extends BaseModel {

@@ -9,8 +9,8 @@ import {
 } from "@ioc:Adonis/Lucid/Orm";
 import { DateTime } from "luxon";
 import Hash from "@ioc:Adonis/Core/Hash";
-import Shop from "App/Models/Shop";
-import Address from "App/Models/Address";
+import Shop from "Infrastructure/Database/Models/Shop";
+import Address from "Infrastructure/Database/Models/Address";
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
