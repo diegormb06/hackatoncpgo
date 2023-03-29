@@ -15,7 +15,11 @@ export default class ProductsController {
     const user = auth.user?.serialize();
 
     if (user && user.role !== "shop")
-      return response.status(401).send({ message: "Unauthorized" });
+      return response
+        .status(401)
+        .send({
+          message: "Seu usuário não está habilitado para criar produtos",
+        });
 
     return this.productService.createProduct(request.all());
   }

@@ -29,7 +29,6 @@ Route.group(() => {
 }).prefix("/auth");
 
 Route.group(() => {
-  Route.resource("products", "ProductsController").apiOnly();
   Route.get("products/search", "ProductsController.searchProduct");
 
   Route.post("registerUser", "UsersController.store");
@@ -51,6 +50,8 @@ Route.group(() => {
     "shops/:shopId/addPaymentAccount",
     "OrdersController.createPaymentAccount"
   );
+
+  Route.resource("products", "ProductsController").apiOnly();
 
   Route.resource("orders", "OrdersController").apiOnly();
   Route.get("orders/stats", "OrdersController.orderStats");
