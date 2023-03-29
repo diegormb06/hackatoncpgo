@@ -2,14 +2,21 @@ import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
 import ProductService from "App/services/ProductService";
 
 export default class ProductsController {
-  private readonly productService: ProductService = new ProductService();
+  constructor(
+    private readonly productService: ProductService = new ProductService()
+  ) {}
 
   public async index({ request }: http) {
     const currentPage = request.input("page", 1);
     return this.productService.getProduct(currentPage);
   }
 
-  public async store({ request }: http) {
+  public async store({ auth, request, response }: http) {
+    const user = auth.user?.serialize();
+
+    if (user && user.role !== "shop")
+      return response.status(401).send({ message: "Unauthorized" });
+
     return this.productService.createProduct(request.all());
   }
 
@@ -17,7 +24,12 @@ export default class ProductsController {
     return this.productService.showProduct(params.id);
   }
 
-  public async update({ params, request }: http) {
+  public async update({ auth, params, request, response }: http) {
+    const user = auth.user?.serialize();
+
+    if (user && user.role !== "shop")
+      return response.status(401).send({ message: "Unauthorized" });
+
     return this.productService.updateProduct(params.id, request.all());
   }
 
