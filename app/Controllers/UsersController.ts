@@ -1,13 +1,15 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
-import UserServices from "@ioc:Api/UserServices";
+
 import CreateUserValidator from "App/Validators/CreateUserValidator";
 import { IUserServices } from "Domain/interfaces/IUserServices";
 import AuthController from "./AuthController";
+import UserServices from "App/services/UserServices";
 
 export default class UsersController {
-  private readonly authController = new AuthController();
-
-  constructor(private readonly userService: IUserServices = UserServices) {}
+  constructor(
+    private readonly userService: IUserServices = new UserServices(),
+    private readonly authController = new AuthController()
+  ) {}
 
   public async index() {
     return this.userService.getUsers();

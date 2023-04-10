@@ -1,6 +1,5 @@
 import "reflect-metadata";
 import { join } from "path";
-import getPorts from "get-port";
 import { configure } from "japa";
 import sourceMapSupport from "source-map-support";
 
@@ -10,7 +9,7 @@ sourceMapSupport.install({ handleUncaughtExceptions: false });
 
 async function startHttpServer() {
   const { Ignitor } = await import("@adonisjs/core/build/src/Ignitor");
-  process.env.PORT = String(await getPorts());
+  process.env.PORT = "3000";
   await new Ignitor(__dirname).httpServer().start();
 }
 

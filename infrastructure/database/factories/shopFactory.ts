@@ -1,6 +1,7 @@
 import Factory from "@ioc:Adonis/Lucid/Factory";
-import Shop from "Infrastructure/database/Models/Shop";
-import { UserFactory } from "Database/factories/userFactory";
+
+import { UserFactory } from "./userFactory";
+import Shop from "Infrastructure/Database/Models/Shop";
 
 export const ShopFactory = Factory.define(Shop, async ({ faker }) => {
   return {

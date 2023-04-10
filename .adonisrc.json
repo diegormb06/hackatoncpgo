@@ -13,6 +13,7 @@
     "providers": "providers",
     "database": "infrastructure/database",
     "migrations": "infrastructure/database/migrations",
+    "factories": "infrastructure/database/factories",
     "seeds": "infrastructure/database/seeders",
     "resources": "resources",
     "views": "resources/views",

@@ -18,6 +18,7 @@ export default class ShopServices implements IShopServices {
   }
 
   async createShop(data: Shop) {
+    data.country = "Brasil";
     const newShop = await this.shopRepository.create(data);
 
     if (newShop.id) {

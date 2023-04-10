@@ -9,7 +9,7 @@ import {
 } from "@ioc:Adonis/Lucid/Orm";
 import User from "Infrastructure/database/Models/User";
 import Product from "Infrastructure/database/Models/Product";
-import Order from "./Order";
+import Order from "Infrastructure/database/Models/Order";
 
 export default class Shop extends BaseModel {
   @column({ isPrimary: true })

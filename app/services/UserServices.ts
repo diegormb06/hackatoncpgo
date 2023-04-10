@@ -1,9 +1,10 @@
 import { IUserServices } from "Domain/interfaces/IUserServices";
 // import UserRepository from "@ioc:Api/UserRepository";
 import IUserRepository from "Domain/interfaces/IUserRepository";
+import UserRepository from "Infrastructure/Repositories/UserRepository";
 
 export default class UserServices implements IUserServices {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(private userRepository: IUserRepository = new UserRepository()) {}
 
   getUsers() {
     return this.userRepository.getAll();

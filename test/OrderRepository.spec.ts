@@ -1,6 +1,6 @@
 import test from "japa";
 import OrderRepository from "Infrastructure/Repositories/OrderRepository";
-import { OrderFactory } from "Database/factories/orderFactory";
+import { OrderFactory } from "Infrastructure/database/factories/orderFactory";
 const orderRepository = new OrderRepository();
 
 const orderAttributes = [

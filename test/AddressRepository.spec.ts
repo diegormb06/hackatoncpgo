@@ -1,6 +1,7 @@
 import test from "japa";
+
+import { AddressFactory } from "Infrastructure/database/factories/addressFactory";
 import AddressRepository from "Infrastructure/Repositories/AddressRepository";
-import { AddressFactory } from "Database/factories/addressFactory";
 const addressRepository = new AddressRepository();
 
 const addressAttributes = [

@@ -1,6 +1,6 @@
 import test from "japa";
 import supertest from "supertest";
-import { UserFactory } from "Database/factories/userFactory";
+import { UserFactory } from "Infrastructure/database/factories/userFactory";
 import Database from "@ioc:Adonis/Lucid/Database";
 const BASE_URL = `http://${process.env.HOST}:${process.env.PORT}`;
 const api = supertest(BASE_URL + "/autofast/api");

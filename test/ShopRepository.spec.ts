@@ -1,6 +1,7 @@
 import test from "japa";
 import { ShopRepository } from "Infrastructure/Repositories/ShopRepository";
-import { ShopFactory } from "Database/factories/shopFactory";
+import { ShopFactory } from "Infrastructure/database/factories/shopFactory"
+
 const shopRepository = new ShopRepository();
 
 const shopAttributes = [

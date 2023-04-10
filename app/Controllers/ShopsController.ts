@@ -1,10 +1,13 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
-import ShopServices from "@ioc:Api/ShopServices";
+
 import CreateShopValidator from "App/Validators/CreateShopValidator";
+import ShopServices from "App/services/ShopServices";
 import { IShopServices } from "Domain/interfaces/IShopServices";
 
 export default class ShopsController {
-  constructor(private readonly shopServices: IShopServices = ShopServices) {}
+  constructor(
+    private readonly shopServices: IShopServices = new ShopServices()
+  ) {}
 
   async index({ params }: http) {
     const { page } = params;

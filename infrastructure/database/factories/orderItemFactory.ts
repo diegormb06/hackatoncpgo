@@ -1,7 +1,8 @@
 import Factory from "@ioc:Adonis/Lucid/Factory";
-import { OrderFactory } from "Database/factories/orderFactory";
-import { ProductFactory } from "Database/factories/productFactory";
+
 import OrderItem from "Infrastructure/database/Models/OrderItem";
+import { ProductFactory } from "./productFactory";
+import { OrderFactory } from "./orderFactory";
 
 export const OrderItemFactory = Factory.define(OrderItem, async ({ faker }) => {
   const product = await ProductFactory.create();
