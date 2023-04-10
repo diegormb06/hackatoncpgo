@@ -1,8 +1,8 @@
 import Order from "Infrastructure/database/Models/Order";
 import { OrderStatus } from "domain/enums/OrderStatus";
 import Database from "@ioc:Adonis/Lucid/Database";
-import { IOrderRepository } from "Contracts/interfaces/IOrderRepository";
 import BaseRepository from "./BaseRepository";
+import { IOrderRepository } from "Domain/interfaces/IOrderRepository";
 
 export default class OrderRepository
   extends BaseRepository

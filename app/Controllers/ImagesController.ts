@@ -1,25 +1,30 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
-import imageService from "@ioc:Api/ImageServices";
 import Application from "@ioc:Adonis/Core/Application";
+import { IImagesServices } from "Domain/interfaces/IImagesServices";
+import { ImageServices } from "App/services/ImageServices";
 
 export default class ImagesController {
+  constructor(
+    private readonly imageServices: IImagesServices = new ImageServices()
+  ) {}
+
   public async uploadPhoto({ request, params }: http) {
     const file = request.file("photo", {
       size: "2mb",
       extnames: ["jpg", "png", "gif"],
     });
 
-    return imageService.uploadPhoto(params.user_id, file);
+    return this.imageServices.uploadPhoto(params.user_id, file);
   }
 
   public uploadImages({ request, params }: http) {
     const images = request.files("images");
     if (!images) return "não foi localizado imagens";
-    return imageService.uploadImages(params.product_id, images);
+    return this.imageServices.uploadImages(params.product_id, images);
   }
 
   public async deletePhoto({ params }: http) {
-    return imageService.deletePhoto(params.user_id);
+    return this.imageServices.deletePhoto(params.user_id);
   }
 
   public async show({ params, response }) {
@@ -29,6 +34,6 @@ export default class ImagesController {
   }
 
   public async deleteImages({ params }: http) {
-    return imageService.deleteProductImage(params.image_id);
+    return this.imageServices.deleteProductImage(params.image_id);
   }
 }

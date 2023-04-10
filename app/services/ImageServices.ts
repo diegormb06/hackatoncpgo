@@ -5,7 +5,7 @@ import ProductImageRepository from "Infrastructure/Repositories/ProductImageRepo
 import cuid from "cuid";
 import fs from "fs";
 
-export class ImageService {
+export class ImageServices {
   async uploadPhoto(user_id: number, newImage: MultipartFileContract) {
     const newPhoto = `${cuid()}.${newImage.extname}`;
 

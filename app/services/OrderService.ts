@@ -4,7 +4,7 @@ import { IOrderServices } from "Domain/interfaces/IOrderServices";
 import { IOrderRepository } from "Domain/interfaces/IOrderRepository";
 import OrderRepository from "Infrastructure/Repositories/OrderRepository";
 
-export class OrderService implements IOrderServices {
+export class OrderServices implements IOrderServices {
   constructor(
     private readonly orderRepository: IOrderRepository = new OrderRepository()
   ) {}
