@@ -13,7 +13,7 @@ export default class CreateUsersTable extends BaseSchema {
       table.string("cpf", 14).unique().notNullable();
       table.string("phone", 14).notNullable();
       table.string("photo");
-      table.enum("role", ["store", "admin", "user"]).defaultTo("user");
+      table.enum("role", ["shop", "admin", "user"]).defaultTo("user");
       table.timestamps();
     });
   }

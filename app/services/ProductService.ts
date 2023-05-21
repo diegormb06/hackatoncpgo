@@ -1,10 +1,11 @@
 import ProductRepository from "../../infrastructure/Repositories/ProductRepository";
 
 export default class ProductService {
-  private readonly productRepository: ProductRepository =
-    new ProductRepository();
+  constructor(
+    private productRepository: ProductRepository = new ProductRepository()
+  ) {}
 
-  getProduct(page) {
+  async getProduct(page) {
     return this.productRepository.getAll(page);
   }
 

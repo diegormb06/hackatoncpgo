@@ -2,10 +2,14 @@ import { ShopRepository } from "Infrastructure/Repositories/ShopRepository";
 import { IShopRepository } from "Domain/interfaces/IShopRepository";
 import { IShopServices } from "Domain/interfaces/IShopServices";
 import { PaymentService } from "./PaymentService";
+import IUserRepository from "Domain/interfaces/IUserRepository";
+import UserRepository from "Infrastructure/Repositories/UserRepository";
+import { UserRoles } from "Domain/enums/UserRoles";
 
 export default class ShopServices implements IShopServices {
   constructor(
     private shopRepository: IShopRepository = new ShopRepository(),
+    private userRepository: IUserRepository = new UserRepository(),
     private paymentGatewayService: PaymentService = new PaymentService()
   ) {}
 
@@ -17,24 +21,28 @@ export default class ShopServices implements IShopServices {
     return await this.shopRepository.findOne(id);
   }
 
-  async createShop(data: Shop) {
-    data.country = "Brasil";
-    const newShop = await this.shopRepository.create(data);
+  async createShop(newShopData: Shop) {
+    newShopData.country = "Brasil";
+    const newShop = await this.shopRepository.create(newShopData);
 
     if (newShop.id) {
       const paymentGatewayAccount =
-        await this.paymentGatewayService.createShopAccount(data);
+        await this.paymentGatewayService.createShopAccount(newShop);
 
       if (!paymentGatewayAccount?.account?.id) {
         throw new Error("Payment gateway account not created");
       }
 
-      const newShopData = {
-        ...data,
+      await this.userRepository.update(newShopData.user_id, {
+        role: UserRoles.SHOP,
+      });
+
+      const newShopResponse = {
+        ...newShopData,
         payment_account: paymentGatewayAccount.account.id,
       };
 
-      return this.updateShop(newShop.id, newShopData);
+      return this.updateShop(newShop.id, newShopResponse);
     }
 
     return newShop;

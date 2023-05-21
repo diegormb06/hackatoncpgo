@@ -1,5 +1,6 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
 import ProductService from "App/services/ProductService";
+import { UserRoles } from "../../domain/enums/UserRoles"
 
 export default class ProductsController {
   constructor(
@@ -14,11 +15,11 @@ export default class ProductsController {
   public async store({ auth, request, response }: http) {
     const user = auth.user?.serialize();
 
-    if (user && user.role !== "shop")
+    if (user && user.role !== UserRoles.SHOP)
       return response
         .status(401)
         .send({
-          message: "Seu usuário não está habilitado para criar produtos",
+          message: "Usuário não habilitado para criar produtos",
         });
 
     return this.productService.createProduct(request.all());

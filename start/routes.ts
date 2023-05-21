@@ -29,15 +29,18 @@ Route.group(() => {
 }).prefix("/auth");
 
 Route.group(() => {
-  Route.get("products/search", "ProductsController.searchProduct");
-
   Route.post("registerUser", "UsersController.store");
   Route.get("uploads/:type/:filename", "ImagesController.show");
+  Route.get("products", "ProductsController.index");
+  Route.get("products/search", "ProductsController.searchProduct");
 });
 
 Route.group(() => {
   Route.resource("users", "UsersController").apiOnly();
   Route.resource("address", "AddressesController").apiOnly();
+
+  Route.post("products", "ProductsController.store");
+  Route.put("products", "ProductsController.update");
 
   Route.resource("shops", "ShopsController").apiOnly();
   Route.get("shops/:shopId/products", "ShopsController.getProductsByShop");
@@ -46,12 +49,11 @@ Route.group(() => {
     "shops/confirm-integration/:paymentAccount",
     "ShopsController.confirmIntegration"
   );
+
   Route.get(
     "shops/:shopId/addPaymentAccount",
     "OrdersController.createPaymentAccount"
   );
-
-  Route.resource("products", "ProductsController").apiOnly();
 
   Route.resource("orders", "OrdersController").apiOnly();
   Route.get("orders/stats", "OrdersController.orderStats");

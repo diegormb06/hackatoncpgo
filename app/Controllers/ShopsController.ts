@@ -15,9 +15,13 @@ export default class ShopsController {
   }
 
   async store({ request }: http) {
-    await request.validate(CreateShopValidator);
-    const newShopData = request.all() as Shop;
-    return this.shopServices.createShop(newShopData);
+    try {
+      await request.validate(CreateShopValidator);
+      const newShopData = request.all() as Shop;
+      return this.shopServices.createShop(newShopData);
+    } catch (error) {
+      return error.message;
+    }
   }
 
   async show({ params }: http) {
