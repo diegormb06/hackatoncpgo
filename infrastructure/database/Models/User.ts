@@ -9,9 +9,8 @@ import {
 } from "@ioc:Adonis/Lucid/Orm";
 import { DateTime } from "luxon";
 import Hash from "@ioc:Adonis/Core/Hash";
-import Shop from "./Shop"
-import Address from "./Address"
-
+import Shop from "./Shop";
+import Address from "./Address";
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -60,5 +59,5 @@ export default class User extends BaseModel {
   public shop: HasOne<typeof Shop>;
 
   @hasMany(() => Address)
-  public address: HasMany<typeof Address>;
+  public addresses: HasMany<typeof Address>;
 }

@@ -14,7 +14,7 @@ export default class UserRepository
     const data = await User.query()
       .where("id", id)
       .preload("shop")
-      .preload("address")
+      .preload("addresses")
       .first();
     return data?.serialize();
   }

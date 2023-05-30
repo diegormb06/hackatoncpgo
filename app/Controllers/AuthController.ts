@@ -4,15 +4,16 @@ import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
 import UserRepository from "Infrastructure/Repositories/UserRepository";
 
 export default class AuthController {
+  constructor(private readonly userRepository = new UserRepository()) {}
+
   public async login({ auth, request, response }: http) {
     const email = request.input("email");
     const password = request.input("password");
-    const userRepository = new UserRepository();
 
     try {
       const { token } = await auth.use("api").attempt(email, password);
       const user = auth.user?.serialize();
-      const userData = await userRepository.findOne(user?.id);
+      const userData = await this.userRepository.findOne(user?.id);
       return { ...userData, token };
     } catch (error) {
       console.log(error);

@@ -24,7 +24,11 @@ export class ShopRepository extends BaseRepository implements IShopRepository {
 
   async getProductsByShop(shopId, page) {
     const shop = await Shop.findOrFail(shopId);
-    return await shop.related("products").query().paginate(page, 10);
+    return await shop
+      .related("products")
+      .query()
+      .preload("images")
+      .paginate(page, 10);
   }
 
   async getOrdersByShop(shopId, page) {
