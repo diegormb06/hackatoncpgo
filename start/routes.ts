@@ -57,7 +57,7 @@ Route.group(() => {
 
   Route.resource("orders", "OrdersController").apiOnly();
   Route.get("orders/stats", "OrdersController.orderStats");
-  Route.put("orders/:orderId/:status", "OrdersController.updateStatus");
+  Route.put("orders/:orderId/status/:status", "OrdersController.updateStatus");
 
   Route.post("uploads/photo/:user_id", "ImagesController.uploadPhoto");
   Route.delete("uploads/photo/:user_id", "ImagesController.deletePhoto");

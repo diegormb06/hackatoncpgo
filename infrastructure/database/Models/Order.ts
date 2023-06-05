@@ -6,11 +6,13 @@ import {
   belongsTo,
   column,
   hasMany,
+  hasOne,
+  HasOne,
 } from "@ioc:Adonis/Lucid/Orm";
 import OrderItem from "Infrastructure/database/Models/OrderItem";
-import User from "Infrastructure/database/Models/User";
-
+import User from "./User";
 import Shop from "./Shop";
+import Address from "./Address";
 import { OrderStatus } from "Domain/enums/OrderStatus";
 
 export default class Order extends BaseModel {
@@ -43,6 +45,9 @@ export default class Order extends BaseModel {
 
   @hasMany(() => OrderItem)
   public items: HasMany<typeof OrderItem>;
+
+  @hasOne(() => Address)
+  public address: HasOne<typeof Address>;
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>;

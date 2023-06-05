@@ -16,7 +16,7 @@ export default class CreateAddressesTable extends BaseSchema {
       table.string("zipcode", 8).notNullable();
       table.string("number", 6);
       table.string("complement");
-      table.string("district");
+      table.string("neighborhood", 50);
       table.string("city", 50);
       table.string("state", 50).defaultTo("Goiás");
       table.string("country", 50).defaultTo("Brasil");

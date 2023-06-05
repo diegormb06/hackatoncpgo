@@ -1,5 +1,6 @@
 import { HttpContextContract as http } from "@ioc:Adonis/Core/HttpContext";
 import { OrderServices } from "App/services/OrderService";
+import { UserRoles } from "Domain/enums/UserRoles";
 import { IOrderServices } from "Domain/interfaces/IOrderServices";
 
 export default class OrdersController {
@@ -33,7 +34,19 @@ export default class OrdersController {
     return this.orderService.deleteOrder(params.id);
   }
 
-  public async updateStatus({ params }: http) {
-    return this.orderService.updateOrderStatus(params.orderId, params.status);
+  public async updateStatus({ auth, params, response }: http) {
+    try {
+      const user = auth.user?.serialize();
+      const order = await this.orderService.findOrder(params.orderId);
+
+      if (!order) return response.notFound("Order not found");
+      if (user?.role !== UserRoles.SHOP && user?.role !== UserRoles.ADMIN)
+        return response.unauthorized();
+
+      await this.orderService.updateOrderStatus(params.orderId, params.status);
+      return response.ok("status updated");
+    } catch (error) {
+      return response.status(500).send(error);
+    }
   }
 }
