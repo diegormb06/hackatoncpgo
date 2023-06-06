@@ -5,10 +5,13 @@ import { PaymentService } from "./PaymentService";
 import IUserRepository from "Domain/interfaces/IUserRepository";
 import UserRepository from "Infrastructure/Repositories/UserRepository";
 import { UserRoles } from "Domain/enums/UserRoles";
+import { IOrderRepository } from "Domain/interfaces/IOrderRepository";
+import OrderRepository from "Infrastructure/Repositories/OrderRepository";
 
 export default class ShopServices implements IShopServices {
   constructor(
     private shopRepository: IShopRepository = new ShopRepository(),
+    private ordersRepository: IOrderRepository = new OrderRepository(),
     private userRepository: IUserRepository = new UserRepository(),
     private paymentGatewayService: PaymentService = new PaymentService()
   ) {}
@@ -91,7 +94,7 @@ export default class ShopServices implements IShopServices {
   }
 
   async getOrdersByShop(shopId, page) {
-    return this.shopRepository.getOrdersByShop(shopId, page);
+    return this.ordersRepository.getOrdersByShop(shopId, page);
   }
 
   async getProductsByShop(shopId, page) {

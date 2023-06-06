@@ -9,6 +9,9 @@ export interface IOrderRepository {
   getOrder(id: number): Promise<Order | null>;
   createOrder(orderData: Order): Promise<Order | null>;
   updateOrderStatus(id: number, status: OrderStatus): Promise<OrderStatus>;
-  getOrdersByShop(shopId): Promise<ModelPaginatorContract<Order>>;
+  getOrdersByShop(
+    shopId: number,
+    page: number
+  ): Promise<ModelPaginatorContract<Order>>;
   ordersStats(): Promise<any>;
 }

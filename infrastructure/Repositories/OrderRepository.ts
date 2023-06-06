@@ -54,14 +54,14 @@ export default class OrderRepository
     return status;
   }
 
-  async getOrdersByShop(shopId) {
+  async getOrdersByShop(shopId, page) {
     const results = (
       await Order.query()
         .preload("user")
         .preload("items", (itemsQuery) => {
           itemsQuery.where("shop_id", shopId);
         })
-        .paginate(1, 15)
+        .paginate(page, 10)
     ).serialize();
     return { data: results.data, ...results.meta };
   }

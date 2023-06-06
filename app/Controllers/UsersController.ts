@@ -27,7 +27,7 @@ export default class UsersController {
   }
 
   public async show({ params }: http) {
-    return this.userService.showUser(params.id);
+    return this.userService.showUser(params.userId);
   }
 
   public async update({ request, params }: http) {

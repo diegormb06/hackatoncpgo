@@ -36,7 +36,15 @@ Route.group(() => {
 });
 
 Route.group(() => {
-  Route.resource("users", "UsersController").apiOnly();
+  Route.get("users", "UsersController.index").middleware("isAdmin");
+  Route.get("users/:userId", "UsersController.show").middleware(
+    "isOwnerOrAdmin"
+  );
+
+  Route.put("users/:userId", "UsersController.update").middleware(
+    "isOwnerOrAdmin"
+  );
+
   Route.resource("address", "AddressesController").apiOnly();
 
   Route.post("products", "ProductsController.store");
@@ -44,7 +52,7 @@ Route.group(() => {
 
   Route.resource("shops", "ShopsController").apiOnly();
   Route.get("shops/:shopId/products", "ShopsController.getProductsByShop");
-  Route.get("shops/:shopId/orders", "OrdersController.getOrdersByShop");
+  Route.get("shops/:shopId/orders", "ShopsController.getOrdersByShop");
   Route.get(
     "shops/confirm-integration/:paymentAccount",
     "ShopsController.confirmIntegration"
