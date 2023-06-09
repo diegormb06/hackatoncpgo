@@ -38,19 +38,45 @@ class _MyHomePageState extends State<MyHomePage> {
               context: context,
               builder: (BuildContext context) {
                 return SizedBox(
-                  height: 200,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        const Text('Modal BottomSheet'),
-                        ElevatedButton(
-                          child: const Text('Close BottomSheet'),
-                          onPressed: () => Navigator.pop(context),
+                  height: 400,
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Form(
+                          child: Column(
+                            children: [
+                              DropdownButtonFormField<String>(
+                                items: ['Sim', 'Não']
+                                    .map((label) => DropdownMenuItem(
+                                          value: label,
+                                          child: Text(label),
+                                        ))
+                                    .toList(),
+                                onChanged: (value) {},
+                                decoration: const InputDecoration(
+                                    labelText: 'Select option 1'),
+                              ),
+                              DropdownButtonFormField<String>(
+                                items: ['Sim', 'Não']
+                                    .map((label) => DropdownMenuItem(
+                                          value: label,
+                                          child: Text(label),
+                                        ))
+                                    .toList(),
+                                onChanged: (value) {},
+                                decoration: const InputDecoration(
+                                    labelText: 'Select option 2'),
+                              ),
+                              TextFormField(
+                                decoration: const InputDecoration(
+                                    labelText: 'Enter text'),
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 );
               },
@@ -60,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('lib/assets/image.jpeg'),
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             ),
           ),
