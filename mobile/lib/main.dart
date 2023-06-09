@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,38 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(15),
-                        child: Form(
-                          child: Column(
-                            children: [
-                              DropdownButtonFormField<String>(
-                                items: ['Sim', 'Não']
-                                    .map((label) => DropdownMenuItem(
-                                          value: label,
-                                          child: Text(label),
-                                        ))
-                                    .toList(),
-                                onChanged: (value) {},
-                                decoration: const InputDecoration(
-                                    labelText: 'Select option 1'),
-                              ),
-                              DropdownButtonFormField<String>(
-                                items: ['Sim', 'Não']
-                                    .map((label) => DropdownMenuItem(
-                                          value: label,
-                                          child: Text(label),
-                                        ))
-                                    .toList(),
-                                onChanged: (value) {},
-                                decoration: const InputDecoration(
-                                    labelText: 'Select option 2'),
-                              ),
-                              TextFormField(
-                                decoration: const InputDecoration(
-                                    labelText: 'Enter text'),
-                              ),
-                            ],
-                          ),
-                        ),
+                        child: FormStudent(),
                       )
                     ],
                   ),
