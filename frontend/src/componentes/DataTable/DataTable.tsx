@@ -44,7 +44,11 @@ export const DataTable = ({
   const formatRow = (e: unknown[]) => {
     return e.map((e, i) => {
       const dataRow = e as string;
-      return <TableCell key={dataRow + i}>{dataRow}</TableCell>;
+      return (
+        <TableCell style={{ color: 'inherit' }} key={dataRow + i}>
+          {dataRow}
+        </TableCell>
+      );
     });
   };
 
@@ -82,6 +86,8 @@ export const DataTable = ({
               key={index}
               style={{
                 border: activeRowIndex === index ? '2px solid #007670' : 'none',
+                fontWeight: 'bold',
+                color: element[4] === 'Alto' ? 'red' : 'inherit',
                 cursor: 'pointer',
               }}
               onClick={() => handleClick(index, data[index])}

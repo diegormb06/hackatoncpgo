@@ -1,4 +1,5 @@
 import { Box, Paper } from '@mui/material';
+import { useEffect, useMemo, useState } from 'react';
 
 import { SideBar } from '../../componentes/Aside/SideBar/Sidebar';
 import { DataTable } from '../../componentes/DataTable/DataTable';
@@ -9,7 +10,49 @@ import { PagePanel } from '../../componentes/PagePanel/PagePanel';
 import { HomeContainer } from './styles';
 import { table } from './tableData';
 
+type TableData = {
+  id: number;
+  serie: string;
+  turma: string;
+  indicios_bullyng: boolean;
+  indicios_violencia: boolean;
+  risco: 'baixo' | 'neutro' | 'alto';
+};
+
 export const Dashboard = () => {
+  const [tableData, setTableData] = useState<TableData>({} as TableData);
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('https://api.autofastapp.com.br/hackaton');
+      const newData = await response.json();
+      console.log(newData.data);
+
+      if (newData.data.length > 0) {
+        setTableData(newData.data[0]);
+      }
+    })();
+  }, []);
+
+  const dataTable = useMemo(() => {
+    if (!tableData?.id) return table;
+
+    table[0] = {
+      Série: tableData.serie,
+      Turma: tableData.turma,
+      'Indicios de Bullyng': tableData.indicios_bullyng ? 'Sim' : 'Não',
+      'Indicios de Violência': tableData.indicios_violencia ? 'Sim' : 'Não',
+      Risco:
+        tableData.risco === 'baixo'
+          ? 'Baixo'
+          : tableData.risco === 'neutro'
+          ? 'Médio'
+          : 'Alto',
+    };
+
+    return table;
+  }, [tableData]);
+
   return (
     <HomeContainer>
       <SideBar />
@@ -30,7 +73,7 @@ export const Dashboard = () => {
           </Box>
 
           <Paper>
-            <DataTable data={table} onItemClick={() => false} />
+            <DataTable data={dataTable} onItemClick={() => false} />
           </Paper>
         </PagePanel>
         <div
