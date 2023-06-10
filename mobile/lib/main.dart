@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorSchemeSeed: const Color(0xff6750a4),
@@ -21,38 +22,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: GestureDetector(
-          onTap: () {
-            showModalBottomSheet<void>(
-              context: context,
-              builder: (BuildContext context) {
-                return SizedBox(
-                  height: 400,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: FormStudent(),
-                      )
-                    ],
-                  ),
-                );
-              },
-            );
-          },
-          child: Container(
+    return Scaffold(
+      body: Stack(
+        children: [
+          Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('lib/assets/image.jpeg'),
@@ -60,7 +38,32 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-        ),
+          GestureDetector(
+            onTap: () {
+              showModalBottomSheet<void>(
+                context: context,
+                builder: (BuildContext context) {
+                  return SingleChildScrollView(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.9,
+                      child: Column(
+                        children: const <Widget>[
+                          Padding(
+                            padding: EdgeInsets.all(15),
+                            child: FormStudent(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+            child: Container(
+              color: Colors.transparent,
+            ),
+          ),
+        ],
       ),
     );
   }
