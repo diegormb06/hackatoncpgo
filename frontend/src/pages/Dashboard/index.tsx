@@ -24,9 +24,9 @@ export const Dashboard = () => {
           }}
         >
           <Box sx={{ display: 'flex', columnGap: 5, rowGap: 2, flexWrap: 'wrap' }}>
-            <Kpr qtdForm={1560} text="Formulários Completos" color="#00766F" />
-            <Kpr qtdForm={210} text="Formulários Não Iniciados" color="#F57A7A" />
-            <Kpr qtdForm={2560} text="Formulários Em Andamento" color="#4368B1" />
+            <Kpr qtdForm={2} text="Turmas com riscos" color="#F57A7A" />
+            <Kpr qtdForm={5} text="Turmas com indicadores neutros" color="#4368B1" />
+            <Kpr qtdForm={3} text="Turmas com indicadores positivos" color="#00766F" />
           </Box>
 
           <Paper>

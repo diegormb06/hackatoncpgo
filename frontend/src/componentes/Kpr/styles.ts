@@ -18,6 +18,7 @@ export const ContainerCardProgress = styled(Paper)<ContainerCardProps>`
     color: ${({ color }) => color};
     font-size: 3em;
     padding: 10px;
+    margin-right: 15px;
     font-family: 'Poppins', sans-serif;
   }
 
@@ -30,5 +31,6 @@ export const ContainerCardProgress = styled(Paper)<ContainerCardProps>`
 
 export const CardHeader = styled.div`
   display: flex;
+  width: 100%;
   align-items: center;
 `;
