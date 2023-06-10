@@ -1,5 +1,5 @@
 import { Box, ListItemButton, ListItemText, useTheme } from '@mui/material';
-import { House, SignOut } from '@phosphor-icons/react';
+import { ChartBar, House, SignOut } from '@phosphor-icons/react';
 import React from 'react';
 
 import { ItemContainer, SidePanel, StyledContainer } from './styles';
@@ -31,13 +31,13 @@ export const SideBar: React.FC = () => {
         <Box>
           <ItemContainer isActive={true}>
             <ListItemButton sx={{ p: '5px' }} className="selected" onClick={() => false}>
-              <House size={35} weight="thin" color="#00766F" />
+              <ChartBar size={35} weight="thin" color="#00766F" />
               <ListItemText
                 sx={{
                   color: theme.palette.primary.main,
                   pl: 1,
                 }}
-                primary={'Home'}
+                primary={'Painel de Riscos'}
               />
             </ListItemButton>
           </ItemContainer>
