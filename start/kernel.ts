@@ -38,8 +38,4 @@ Server.middleware.register([() => import("@ioc:Adonis/Core/BodyParser")]);
 | Route.get('dashboard', 'UserController.dashboard').middleware('auth')
 |
 */
-Server.middleware.registerNamed({
-  auth: () => import("App/Middleware/Auth"),
-  isAdmin: () => import("App/Middleware/IsAdmin"),
-  isOwnerOrAdmin: () => import("App/Middleware/IsOwnerOrAdmin"),
-});
+Server.middleware.registerNamed({});
